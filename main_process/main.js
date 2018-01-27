@@ -1,3 +1,4 @@
+#!/usr/bin/env electron
 const electron = require('electron')
 const parseArgs = require('electron-args')
 const { app, BrowserWindow, protocol } = electron

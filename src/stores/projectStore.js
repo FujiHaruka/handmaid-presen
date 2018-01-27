@@ -1,6 +1,6 @@
 import {Project} from '../models'
-import {updaterOf} from '@self/helpers'
-import {asStore} from '@self/wrappers'
+import {updaterOf} from '../helpers'
+import {asStore} from '../wrappers'
 
 class ProjectStore {
   static initial (props) {

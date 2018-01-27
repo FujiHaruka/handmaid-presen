@@ -1,7 +1,7 @@
-const Project = require('./Project')
-const Videos = require('./Videos')
+import Project from './Project'
+import Videos from './Videos'
 
-export default {
+export {
   Project,
   Videos,
 }

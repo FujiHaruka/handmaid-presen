@@ -1,0 +1,35 @@
+.SettingView {
+
+}
+
+.SettingView-title-wrap {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.SettingView-title {
+  color: #888;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.SettingView-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.SettingView-form-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.SettingView-form-label {
+  margin-bottom: 8px;
+}
+
+.SettingView-form-input {
+  width: 20em;
+  height: 1.5em;
+}

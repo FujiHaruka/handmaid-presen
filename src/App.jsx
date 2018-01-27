@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import {
   projectStore,
-  ViewStore
+  viewStore
 } from './stores'
 import {
   EditView,
@@ -16,7 +16,7 @@ class App extends Component {
   render () {
     const {props} = this
     switch (props.viewPage) {
-      case ViewPage.INIT_PAGE:
+      case ViewPage.SETTINGS_PAGE:
         return (
           <div className='App'>
             <SettingView {...props} />
@@ -34,6 +34,8 @@ class App extends Component {
             <PresentationView {...props} />
           </div>
         )
+      default:
+        throw new Error(`No such view page as ${props.viewPage}`)
     }
   }
 
@@ -49,5 +51,5 @@ class App extends Component {
 
 export default compose(
   projectStore,
-  ViewStore,
+  viewStore,
 )(App)

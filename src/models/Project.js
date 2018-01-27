@@ -1,3 +1,3 @@
-const ModelBase = require('./ModelBase')
+import ModelBase from './ModelBase'
 
-module.exports = ModelBase('project.json')
+export default new ModelBase('project.json')

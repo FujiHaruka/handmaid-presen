@@ -13,5 +13,5 @@ window.globals = {
 }
 
 // globals がセットされてから import したいので
-const App = require('./App')
+const App = require('./App').default
 ReactDOM.render(<App />, document.getElementById('root'))

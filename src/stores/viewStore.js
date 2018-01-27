@@ -1,8 +1,8 @@
-import {updaterOf} from '@self/helpers'
-import {asStore} from '@self/wrappers'
+import {updaterOf} from '../helpers'
+import {asStore} from '../wrappers'
 
 export const ViewPage = {
-  INIT_PAGE: 'INIT_PAGE',
+  SETTINGS_PAGE: 'SETTINGS_PAGE',
   EDIT_PAGE: 'EDIT_PAGE',
   PRESENTATION_PAGE: 'PRESENTATION_PAGE',
 }
@@ -10,7 +10,8 @@ export const ViewPage = {
 class ViewStore {
   static initial (props) {
     return {
-      viewPage: ViewPage.EDIT_PAGE
+      // viewPage: ViewPage.EDIT_PAGE
+      viewPage: ViewPage.SETTINGS_PAGE,
     }
   }
 
@@ -19,7 +20,7 @@ class ViewStore {
   }
 
   static updaters = {
-    setViewPageToInit: () => () => ({viewPage: ViewPage.INIT_PAGE}),
+    setViewPageToInit: () => () => ({viewPage: ViewPage.SETTINGS_PAGE}),
     setViewPageToEdit: () => () => ({viewPage: ViewPage.EDIT_PAGE}),
     setViewPageToPresentation: () => () => ({viewPage: ViewPage.PRESENTATION_PAGE})
   }

@@ -4,7 +4,9 @@
  */
 'use strict'
 
+import updaterOf from './updaterOf'
 
 export {
+  updaterOf,
 }
 

@@ -1,10 +1,11 @@
-const fs = require('fs')
-const {promisify} = require('util')
-const assert = require('assert')
+import promisify from 'es6-promisify'
+
+const fs = window.require('fs')
+const assert = window.require('assert')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
 const existsFile = (path) => new Promise((resolve) => {
-  fs.stats(path, (err) => err ? resolve(false) : resolve(true))
+  fs.stat(path, (err) => err ? resolve(false) : resolve(true))
 })
 const {join} = require('path')
 
@@ -19,7 +20,7 @@ class ModelBase {
   async load () {
     const exists = await existsFile(this.path)
     if (exists) {
-      const data = await readFile(this.path)
+      const data = (await readFile(this.path))
       this.data = JSON.parse(String(data))
     } else {
       console.log(`File ${this.path} is not found. Create a new file.`)
@@ -38,7 +39,6 @@ class ModelBase {
 
   // Merge data
   async update (data = {}) {
-    this._assertData()
     this.data = Object.assign({}, this.data, data)
     await this._sync()
   }
@@ -52,7 +52,8 @@ class ModelBase {
   }
 
   async _sync () {
-    await writeFile(this.path, this.data)
+    const dataStr = JSON.stringify(this.data, null, '  ')
+    await writeFile(this.path, dataStr)
   }
 
   async _assertData () {
@@ -60,4 +61,4 @@ class ModelBase {
   }
 }
 
-module.exports = ModelBase
+export default ModelBase

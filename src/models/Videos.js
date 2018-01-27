@@ -1,3 +1,3 @@
-const ModelBase = require('./ModelBase')
+import ModelBase from './ModelBase'
 
-module.exports = ModelBase('videos.json')
+export default new ModelBase('videos.json')
