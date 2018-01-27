@@ -4,6 +4,7 @@ import {asView} from '../wrappers'
 import {Layout} from 'antd'
 import {
   SlideListPane,
+  SlideEditPane,
 } from '../components'
 
 const {Sider, Content} = Layout
@@ -12,6 +13,7 @@ class EditView extends Component {
   render () {
     const {
       slides,
+      edittingSlide,
       slidesArray,
       prepareNewSlide,
       setEdittingSlide,
@@ -28,7 +30,9 @@ class EditView extends Component {
           />
         </Sider>
         <Content className='EditView-content'>
-          moooooooo
+          <SlideEditPane
+            slide={edittingSlide}
+          />
         </Content>
       </Layout>
     )

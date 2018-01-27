@@ -1,7 +1,7 @@
 const Slide = {
   id: String,
   index: Number,
-  mediaId: String,
+  mediaId: String, // nullable
 }
 
 export default Slide

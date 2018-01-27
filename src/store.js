@@ -5,16 +5,11 @@ import {
   slideStore,
   viewStore,
 } from './stores'
-import {MediaType} from './Consts'
 
 const customActions = withHandlers({
   prepareNewSlide: ({appendSlide, addMedia, setEdittingSlide}) => async () => {
-    const media = await addMedia({
-      mediaType: MediaType.EDITTING,
-      path: null,
-    })
     const slide = await appendSlide({
-      mediaId: media.id
+      mediaId: null
     })
     setEdittingSlide(slide)
   }

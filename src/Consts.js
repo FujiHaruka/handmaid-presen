@@ -7,5 +7,4 @@ export const ViewPage = {
 export const MediaType = {
   VIDEO: 'video',
   PHOTO: 'photo',
-  EDITTING: 'editting',
 }
