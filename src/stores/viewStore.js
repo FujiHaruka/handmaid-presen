@@ -20,9 +20,7 @@ class ViewStore {
   }
 
   static updaters = {
-    setViewPageToInit: () => () => ({viewPage: ViewPage.SETTINGS_PAGE}),
-    setViewPageToEdit: () => () => ({viewPage: ViewPage.EDIT_PAGE}),
-    setViewPageToPresentation: () => () => ({viewPage: ViewPage.PRESENTATION_PAGE})
+    setViewPage: updaterOf('viewPage')
   }
 
   static actions = {

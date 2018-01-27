@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
+import 'antd/dist/antd.css'
 import queryString from 'query-string'
 
 const {resolve} = require('path')

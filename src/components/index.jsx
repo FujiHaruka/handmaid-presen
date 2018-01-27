@@ -4,7 +4,9 @@
  */
 'use strict'
 
+import Menu from './Menu'
 
 export {
+  Menu,
 }
 

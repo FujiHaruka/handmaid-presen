@@ -29,7 +29,7 @@ class SettingView extends Component {
               placeholder='New Project Name'
               value={nameInputStr}
               onChange={linkstate(this, 'nameInputStr')}
-              onKeyPress={this.onPressEnterNameInput}
+              onPressEnter={this.onPressEnterNameInput}
               ref={(input) => { this.nameInput = input }}
             />
           </div>
@@ -39,15 +39,13 @@ class SettingView extends Component {
   }
 
   onPressEnterNameInput = (e) => {
-    if (e.key === 'Enter') {
-      console.log('change project name')
-      const {nameInputStr} = this.state
-      if (nameInputStr.length === 0) {
-        return
-      }
-      this.props.setProjectName(nameInputStr)
-      this.nameInput.blur()
+    console.log('change project name')
+    const {nameInputStr} = this.state
+    if (nameInputStr.length === 0) {
+      return
     }
+    this.props.setProjectName(nameInputStr)
+    this.nameInput.blur()
   }
 }
 

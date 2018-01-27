@@ -9,42 +9,46 @@ import {
   SettingView,
   PresentationView,
 } from './views'
+import {
+  Menu
+} from './components'
 import {ViewPage} from './stores/viewStore'
 import {compose} from 'recompose'
+
+const View = (props) => {
+  switch (props.viewPage) {
+    case ViewPage.SETTINGS_PAGE:
+      return <SettingView {...props} />
+    case ViewPage.EDIT_PAGE:
+      return <EditView {...props} />
+    case ViewPage.PRESENTATION_PAGE:
+      return <PresentationView {...props} />
+    default:
+      throw new Error(`No such view page as ${props.viewPage}`)
+  }
+}
 
 class App extends Component {
   render () {
     const {props} = this
-    switch (props.viewPage) {
-      case ViewPage.SETTINGS_PAGE:
-        return (
-          <div className='App'>
-            <SettingView {...props} />
-          </div>
-        )
-      case ViewPage.EDIT_PAGE:
-        return (
-          <div className='App'>
-            <EditView {...props} />
-          </div>
-        )
-      case ViewPage.PRESENTATION_PAGE:
-        return (
-          <div className='App'>
-            <PresentationView {...props} />
-          </div>
-        )
-      default:
-        throw new Error(`No such view page as ${props.viewPage}`)
-    }
+    const {
+      viewPage,
+      setViewPage,
+    } = props
+    return (
+      <div className='App'>
+        <Menu {...{viewPage, setViewPage}} />
+        <View {...props} />
+      </div>
+    )
   }
 
   async componentDidMount () {
     const {syncProject} = this.props
     await syncProject()
-    const {projectName, setViewPageToInit} = this.props
+    const {projectName, setViewPage} = this.props
     if (!projectName) {
-      setViewPageToInit()
+      setViewPage(ViewPage.SETTINGS_PAGE)
     }
   }
 }
