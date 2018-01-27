@@ -1,11 +1,9 @@
 import Project from './Project'
-import Video from './Video'
-import Photo from './Photo'
+import Media from './Media'
 import Slide from './Slide'
 
 export {
   Project,
-  Video,
-  Photo,
   Slide,
+  Media,
 }

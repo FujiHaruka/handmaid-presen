@@ -2,18 +2,23 @@ import React, { Component } from 'react'
 import './App.css'
 import {
   projectStore,
-  viewStore
+  viewStore,
+  mediaStore,
+  slideStore,
 } from './stores'
 import {
   EditView,
   SettingView,
-  PresentationView,
+  PresentationView
 } from './views'
 import {
   Menu
 } from './components'
+import {Layout} from 'antd'
 import {ViewPage} from './Consts'
 import {compose} from 'recompose'
+
+const {Header, Content} = Layout
 
 const View = (props) => {
   switch (props.viewPage) {
@@ -33,13 +38,17 @@ class App extends Component {
     const {props} = this
     const {
       viewPage,
-      setViewPage,
+      setViewPage
     } = props
     return (
-      <div className='App'>
-        <Menu {...{viewPage, setViewPage}} />
-        <View {...props} />
-      </div>
+      <Layout className='App'>
+        <Header className='App-header'>
+          <Menu {...{viewPage, setViewPage}} />
+        </Header>
+        <Content className='App-view'>
+          <View {...props} />
+        </Content>
+      </Layout>
     )
   }
 
@@ -55,5 +64,7 @@ class App extends Component {
 
 export default compose(
   projectStore,
+  slideStore,
+  mediaStore,
   viewStore,
 )(App)

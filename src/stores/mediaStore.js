@@ -1,7 +1,6 @@
 import {updaterOf, syncFromDb} from '../helpers'
 import {asStore} from '../wrappers'
 import {Media} from '../models'
-import {omit} from 'ramda'
 
 class MediaStore {
   static initial (props) {

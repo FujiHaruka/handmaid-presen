@@ -1,5 +1,5 @@
-import {updaterOf} from '../helpers'
-import {asStore, syncFromDb} from '../wrappers'
+import {updaterOf, syncFromDb} from '../helpers'
+import {asStore} from '../wrappers'
 import {Slide} from '../models'
 
 class SlideStore {

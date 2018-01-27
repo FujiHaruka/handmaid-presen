@@ -1,0 +1,14 @@
+.EditView {
+  background: white;
+  height: 100%;
+}
+
+.EditView-sider {
+  height: 100%;
+  border-right: 1px solid #ddd;
+  background: white;
+}
+
+.EditView-content {
+  background: white;
+}

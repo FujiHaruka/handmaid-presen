@@ -5,8 +5,7 @@ import {ViewPage} from '../Consts'
 class ViewStore {
   static initial (props) {
     return {
-      // viewPage: ViewPage.EDIT_PAGE
-      viewPage: ViewPage.SETTINGS_PAGE,
+      viewPage: ViewPage.EDIT_PAGE,
     }
   }
 

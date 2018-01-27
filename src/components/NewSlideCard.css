@@ -1,0 +1,21 @@
+.NewSlideCard {
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.NewSlideCard-card {
+  cursor: pointer;
+  color: #777;
+  text-align: center;
+  font-size: 2em;
+  border: 1px dashed #ddd;
+  background: white;
+}
+
+.NewSlideCard-card:hover {
+  background: #fcfcfc;
+}
+
+.NewSlideCard-card:active {
+  background: #f8f8f8;
+}

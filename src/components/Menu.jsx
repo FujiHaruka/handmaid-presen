@@ -14,7 +14,7 @@ function Menu ({
       mode='horizontal'
       selectedKeys={[viewPage]}
       onClick={(e) => setViewPage(e.key)}
-      style={{marginBottom: '8px'}}
+      style={{lineHeight: '62px'}}
     >
       <Item key={ViewPage.EDIT_PAGE}>
         Edit
