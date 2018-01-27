@@ -25,11 +25,12 @@ class MediaStore {
       })
     },
     addMedia: ({medias, setMedia}) => async (media) => {
-      await Media.create(media)
+      const created = await Media.create(media)
       await syncFromDb({
         set: setMedia,
         db: Media
       })
+      return created
     },
     removeMedia: ({medias, setMedia}) => async (id) => {
       const media = medias[id]

@@ -6,11 +6,13 @@
 
 import Menu from './Menu'
 import NewSlideCard from './NewSlideCard'
-import SlideEditPane from './SlideEditPane'
+import SlideCard from './SlideCard'
+import SlideListPane from './SlideListPane'
 
 export {
   Menu,
   NewSlideCard,
-  SlideEditPane,
+  SlideCard,
+  SlideListPane,
 }
 

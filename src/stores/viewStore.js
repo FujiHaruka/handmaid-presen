@@ -6,6 +6,7 @@ class ViewStore {
   static initial (props) {
     return {
       viewPage: ViewPage.EDIT_PAGE,
+      edittingSlide: null,
     }
   }
 
@@ -14,7 +15,8 @@ class ViewStore {
   }
 
   static updaters = {
-    setViewPage: updaterOf('viewPage')
+    setViewPage: updaterOf('viewPage'),
+    setEdittingSlide: updaterOf('edittingSlide'),
   }
 
   static actions = {

@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
 import {
-  projectStore,
-  viewStore,
-  mediaStore,
-  slideStore,
-} from './stores'
-import {
   EditView,
   SettingView,
   PresentationView
@@ -16,7 +10,7 @@ import {
 } from './components'
 import {Layout} from 'antd'
 import {ViewPage} from './Consts'
-import {compose} from 'recompose'
+import {connecStore} from './store'
 
 const {Header, Content} = Layout
 
@@ -53,18 +47,19 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    const {syncProject} = this.props
+    const {
+      syncProject,
+      syncMedia,
+      syncSlide,
+    } = this.props
     await syncProject()
     const {projectName, setViewPage} = this.props
     if (!projectName) {
       setViewPage(ViewPage.SETTINGS_PAGE)
     }
+    await syncMedia()
+    await syncSlide()
   }
 }
 
-export default compose(
-  projectStore,
-  slideStore,
-  mediaStore,
-  viewStore,
-)(App)
+export default connecStore(App)

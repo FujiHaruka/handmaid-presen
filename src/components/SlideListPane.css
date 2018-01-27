@@ -1,0 +1,4 @@
+.SlideListPane {
+  height: inherit;
+  overflow-y: scroll;
+}

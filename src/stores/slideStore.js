@@ -1,16 +1,21 @@
 import {updaterOf, syncFromDb} from '../helpers'
 import {asStore} from '../wrappers'
 import {Slide} from '../models'
+import {map} from 'ramda'
 
 class SlideStore {
   static initial (props) {
     return {
-      slides: {}
+      slidesRaw: {}
     }
   }
 
   static computed (props) {
-    const {slides} = props
+    const {slidesRaw, medias} = props
+    const slides = map((slide) => ({
+      ...slide,
+      media: medias[slide.mediaId] || null
+    }))(slidesRaw)
     const slidesArray = Object.keys(slides)
       .map((id) => slides[id])
       .sort((a, b) => a.index - b.index)
@@ -20,29 +25,30 @@ class SlideStore {
   }
 
   static updaters = {
-    setSlides: updaterOf('slides')
+    setSlidesRaw: updaterOf('slidesRaw')
   }
 
   static actions = {
-    syncMedia: ({setSlides}) => async () => {
+    syncSlide: ({setSlidesRaw}) => async () => {
       await syncFromDb({
-        set: setSlides,
+        set: setSlidesRaw,
         db: Slide
       })
     },
-    appendSlide: ({slides, setSlides, slidesArray}) => async (slide) => {
+    appendSlide: ({slides, setSlidesRaw, slidesArray}) => async (slide) => {
       const index = slidesArray.length
       const creating = {
         index,
         ...slide
       }
-      await Slide.create(creating)
+      const created = await Slide.create(creating)
       await syncFromDb({
-        set: setSlides,
+        set: setSlidesRaw,
         db: Slide
       })
+      return created
     },
-    insertSlide: ({setSlides, slidesArray}) => async (slide, index) => {
+    insertSlide: ({setSlidesRaw, slidesArray}) => async (slide, index) => {
       if (index > slidesArray.length) {
         throw new Error(`Index ${index} is out of range`)
       }
@@ -59,18 +65,18 @@ class SlideStore {
         })
       await Slide.update(slides)
       await syncFromDb({
-        set: setSlides,
+        set: setSlidesRaw,
         db: Slide
       })
     },
-    deleteSlideAt: ({setSlides, slides, slidesArray}) => async (index) => {
+    deleteSlideAt: ({setSlidesRaw, slides, slidesArray}) => async (index) => {
       if (index > slidesArray.length) {
         throw new Error(`Index ${index} is out of range`)
       }
       const slide = slidesArray[index]
       await Slide.delete(slide.id)
       await syncFromDb({
-        set: setSlides,
+        set: setSlidesRaw,
         db: Slide
       })
     }

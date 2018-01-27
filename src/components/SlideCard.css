@@ -1,0 +1,10 @@
+.SlideCard {
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.SlideCard-card {
+  cursor: pointer;
+  color: #444;
+  background: white;
+}

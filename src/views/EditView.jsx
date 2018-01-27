@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {asView} from '../wrappers'
 import {Layout} from 'antd'
 import {
-  SlideEditPane,
+  SlideListPane,
 } from '../components'
 
 const {Sider, Content} = Layout
@@ -13,15 +13,17 @@ class EditView extends Component {
     const {
       slides,
       slidesArray,
-      prepareNewSlide = () => {},
+      prepareNewSlide,
+      setEdittingSlide,
     } = this.props
     return (
       <Layout className='EditView'>
         <Sider className='EditView-sider'>
-          <SlideEditPane
+          <SlideListPane
             {...{
               slidesArray,
-              prepareNewSlide
+              prepareNewSlide,
+              setEdittingSlide,
             }}
           />
         </Sider>
