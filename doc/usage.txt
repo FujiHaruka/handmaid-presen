@@ -1,0 +1,4 @@
+Usage
+$ handmaid-presen [project-dir]
+
+project-dir - Project directory
