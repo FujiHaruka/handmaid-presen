@@ -1,4 +1,7 @@
 import promisify from 'es6-promisify'
+import {omit} from 'ramda'
+import {uid} from '../helpers'
+import sortKeys from 'sort-keys'
 
 const fs = window.require('fs')
 const assert = window.require('assert')
@@ -18,6 +21,9 @@ class ModelBase {
   }
 
   async load () {
+    if (this.isLoaded) {
+      return
+    }
     const exists = await existsFile(this.path)
     if (exists) {
       const data = (await readFile(this.path))
@@ -43,15 +49,21 @@ class ModelBase {
     await this._sync()
   }
 
+  async create (data) {
+    const id = uid()
+    const created = {id, ...data}
+    await this.update({[id]: created})
+    return created
+  }
+
   async delete (key) {
     this._assertData()
-    const data = Object.assign({}, this.data)
-    delete data[key]
-    this.data = data
+    this.data = omit(key)(this.data)
     await this._sync()
   }
 
   async _sync () {
+    this.data = sortKeys(this.data)
     const dataStr = JSON.stringify(this.data, null, '  ')
     await writeFile(this.path, dataStr)
   }

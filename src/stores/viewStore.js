@@ -1,11 +1,6 @@
 import {updaterOf} from '../helpers'
 import {asStore} from '../wrappers'
-
-export const ViewPage = {
-  SETTINGS_PAGE: 'SETTINGS_PAGE',
-  EDIT_PAGE: 'EDIT_PAGE',
-  PRESENTATION_PAGE: 'PRESENTATION_PAGE',
-}
+import {ViewPage} from '../Consts'
 
 class ViewStore {
   static initial (props) {

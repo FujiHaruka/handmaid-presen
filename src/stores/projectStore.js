@@ -19,9 +19,7 @@ class ProjectStore {
 
   static actions = {
     syncProject: ({setProjectNameRaw, setProjectDirRaw}) => async () => {
-      if (!Project.isLoaded) {
-        await Project.load()
-      }
+      await Project.load()
       setProjectNameRaw(Project.get('name'))
     },
     setProjectName: ({setProjectNameRaw}) => async (name) => {

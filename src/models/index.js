@@ -1,7 +1,11 @@
 import Project from './Project'
-import Videos from './Videos'
+import Video from './Video'
+import Photo from './Photo'
+import Slide from './Slide'
 
 export {
   Project,
-  Videos,
+  Video,
+  Photo,
+  Slide,
 }

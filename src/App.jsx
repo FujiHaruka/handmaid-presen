@@ -12,7 +12,7 @@ import {
 import {
   Menu
 } from './components'
-import {ViewPage} from './stores/viewStore'
+import {ViewPage} from './Consts'
 import {compose} from 'recompose'
 
 const View = (props) => {
