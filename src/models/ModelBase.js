@@ -22,9 +22,13 @@ class ModelBase {
       const data = await readFile(this.path)
       this.data = JSON.parse(String(data))
     } else {
-      console.log(`File ${this.path} is not found.`)
-      this.data = {}
+      console.log(`File ${this.path} is not found. Create a new file.`)
+      await this.update({})
     }
+  }
+
+  get (key) {
+    return this.data[key] || null
   }
 
   // Merge data

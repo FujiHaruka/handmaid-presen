@@ -1,0 +1,13 @@
+const { dir } = require('the-templates')
+
+module.exports = dir.recursive({
+  dirname: __dirname,
+  name: 'stores',
+  ext: '.js',
+  description: 'stores'
+})
+
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}
