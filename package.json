@@ -8,6 +8,7 @@
     "coz": "^6.0.20",
     "electron": "^1.7.11",
     "electron-args": "^0.1.0",
+    "linkstate": "^1.1.0",
     "query-string": "^5.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

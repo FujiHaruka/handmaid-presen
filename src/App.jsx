@@ -1,21 +1,53 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
+import {
+  projectStore,
+  ViewStore
+} from './stores'
+import {
+  EditView,
+  SettingView,
+  PresentationView,
+} from './views'
+import {ViewPage} from './stores/viewStore'
+import {compose} from 'recompose'
 
 class App extends Component {
   render () {
-    return (
-      <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to React</h1>
-        </header>
-        <p className='App-intro'>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    )
+    const {props} = this
+    switch (props.viewPage) {
+      case ViewPage.INIT_PAGE:
+        return (
+          <div className='App'>
+            <SettingView {...props} />
+          </div>
+        )
+      case ViewPage.EDIT_PAGE:
+        return (
+          <div className='App'>
+            <EditView {...props} />
+          </div>
+        )
+      case ViewPage.PRESENTATION_PAGE:
+        return (
+          <div className='App'>
+            <PresentationView {...props} />
+          </div>
+        )
+    }
+  }
+
+  async componentDidMount () {
+    const {syncProject} = this.props
+    await syncProject()
+    const {projectName, setViewPageToInit} = this.props
+    if (!projectName) {
+      setViewPageToInit()
+    }
   }
 }
 
-export default App
+export default compose(
+  projectStore,
+  ViewStore,
+)(App)

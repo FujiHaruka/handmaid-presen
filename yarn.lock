@@ -4404,6 +4404,10 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+linkstate@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/linkstate/-/linkstate-1.1.0.tgz#c84643731c7fcbf2efdee70d23c04e145f84a5a3"
+
 list-item@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/list-item/-/list-item-1.1.1.tgz#0c65d00e287cb663ccb3cb3849a77e89ec268a56"

@@ -7,11 +7,11 @@ const existsFile = (path) => new Promise((resolve) => {
   fs.stats(path, (err) => err ? resolve(false) : resolve(true))
 })
 const {join} = require('path')
-const getProjectDir = require('../helpers/getProjectDir')
 
 class ModelBase {
   constructor (name) {
-    const projectDir = getProjectDir()
+    const {projectDir} = window.globals
+    this.isLoaded = false
     this.path = join(projectDir, name)
     this.data = null
   }
@@ -25,6 +25,11 @@ class ModelBase {
       console.log(`File ${this.path} is not found. Create a new file.`)
       await this.update({})
     }
+    this.isLoaded = true
+  }
+
+  getWhole () {
+    return this.data
   }
 
   get (key) {
