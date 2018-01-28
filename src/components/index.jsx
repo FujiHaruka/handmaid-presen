@@ -4,6 +4,7 @@
  */
 'use strict'
 
+import AssetPhotoCards from './AssetPhotoCards'
 import AssetTypeTabs from './AssetTypeTabs'
 import Menu from './Menu'
 import NewSlideCard from './NewSlideCard'
@@ -13,6 +14,7 @@ import SlideEditPane from './SlideEditPane'
 import SlideListPane from './SlideListPane'
 
 export {
+  AssetPhotoCards,
   AssetTypeTabs,
   Menu,
   NewSlideCard,

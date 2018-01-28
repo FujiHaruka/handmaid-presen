@@ -4,6 +4,7 @@ import {asView} from '../wrappers'
 import {
   AssetTypeTabs,
   PhotoDragger,
+  AssetPhotoCards,
 } from '../components'
 
 class AssetView extends Component {
@@ -28,11 +29,9 @@ class AssetView extends Component {
           />
         </div>
         <div>
-          {
-            assetPhotos.map((a) =>
-              <div key={a.id}>{JSON.stringify(a)}</div>
-            )
-          }
+          <AssetPhotoCards
+            {...{assetPhotos}}
+          />
         </div>
       </div>
     )

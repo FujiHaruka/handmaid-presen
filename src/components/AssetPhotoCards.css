@@ -1,0 +1,14 @@
+.AssetPhotoCards {
+  margin-top: 8px;
+  margin-right: 8px;
+  margin-left: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.AssetPhotoCard {
+  margin: 8px;
+  width: 320px;
+  height: 180px;
+}

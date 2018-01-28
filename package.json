@@ -24,6 +24,7 @@
     "uuid": "^3.2.1"
   },
   "scripts": {
+    "electron": "electron --allow-file-access-from-files ./main_process/main.js",
     "preinstall": "./misc/mustInstallByNpm.js",
     "prepare": "electron-rebuild",
     "start": "react-scripts start",
