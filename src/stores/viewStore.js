@@ -12,8 +12,9 @@ class ViewStore {
     return {
       viewPage: ViewPage.ASSET_PAGE,
       edittingSlide: null,
-      assetTabKey: AssetPageTab.PHOTO,
+      assetTabKey: AssetPageTab.VIDEO,
       visibleAssetDeletingModal: false,
+      visibleHeader: true,
       deletingAsset: null,
     }
   }
@@ -27,6 +28,7 @@ class ViewStore {
     setEdittingSlide: updaterOf('edittingSlide'),
     setAssetTabKey: updaterOf('assetTabKey'),
     setVisibleAssetDeletingModal: updaterOf('visibleAssetDeletingModal'),
+    setVisibleHeader: updaterOf('visibleHeader'),
     setDeletingAsset: updaterOf('deletingAsset'),
   }
 

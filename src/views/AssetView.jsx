@@ -4,6 +4,7 @@ import {asView} from '../wrappers'
 import {
   AssetTypeTabs,
   AssetPhotoPane,
+  AssetVideoPane,
   AssetDeletingModal,
 } from '../components'
 import {AssetType} from '../Consts'
@@ -26,6 +27,7 @@ class AssetView extends Component {
           onChange={setAssetTabKey}
         />
         <AssetPhotoPane if={assetTabKey === AssetType.PHOTO} {...props} />
+        <AssetVideoPane if={assetTabKey === AssetType.VIDEO} {...props} />
 
         <AssetDeletingModal
           asset={deletingAsset}

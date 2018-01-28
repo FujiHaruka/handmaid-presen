@@ -8,6 +8,7 @@ import AssetDeletingModal from './AssetDeletingModal'
 import AssetListCards from './AssetListCards'
 import AssetPhotoPane from './AssetPhotoPane'
 import AssetTypeTabs from './AssetTypeTabs'
+import AssetVideoPane from './AssetVideoPane'
 import Menu from './Menu'
 import NewSlideCard from './NewSlideCard'
 import PhotoDragger from './PhotoDragger'
@@ -20,6 +21,7 @@ export {
   AssetListCards,
   AssetPhotoPane,
   AssetTypeTabs,
+  AssetVideoPane,
   Menu,
   NewSlideCard,
   PhotoDragger,

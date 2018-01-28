@@ -5,6 +5,7 @@ export const ViewPage = {
   EDIT_PAGE: 'EDIT_PAGE',
   ASSET_PAGE: 'ASSET_PAGE',
   PRESENTATION_PAGE: 'PRESENTATION_PAGE',
+  RECORDING_PAGE: 'RECORDING_PAGE',
 }
 
 export const AssetType = {
