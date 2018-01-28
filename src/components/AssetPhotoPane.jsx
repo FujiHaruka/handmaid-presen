@@ -1,7 +1,7 @@
 import './AssetPhotoPane.css'
 import React from 'react'
 import PhotoDragger from './PhotoDragger'
-import AssetPhotoCards from './AssetPhotoCards'
+import AssetListCards from './AssetListCards'
 import AssetDeletingModal from './AssetDeletingModal'
 import {onlyIf} from '../wrappers'
 
@@ -21,8 +21,9 @@ const AssetPhotoPane = ({
       />
     </div>
     <div>
-      <AssetPhotoCards
-        {...{assetPhotos, prepareDeleteAsset}}
+      <AssetListCards
+        assetList={assetPhotos}
+        {...{prepareDeleteAsset}}
       />
     </div>
 

@@ -1,4 +1,4 @@
-.AssetPhotoCards {
+.AssetListCards {
   margin-top: 8px;
   margin-right: 8px;
   margin-left: 8px;
@@ -7,20 +7,20 @@
   justify-content: center;
 }
 
-.AssetPhotoCard {
+.AssetCard {
   margin: 8px;
   width: 320px;
   height: 180px;
 }
 
-.AssetPhotoCard-cover {
+.AssetCard-cover {
   position: relative;
 }
 
-.AssetPhotoCard-img {
+.AssetCard-img {
 }
 
-.AssetPhotoCard-delete {
+.AssetCard-delete {
   position: absolute;
   display: block;
   top: 16px;
