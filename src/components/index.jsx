@@ -6,6 +6,7 @@
 
 import AssetDeletingModal from './AssetDeletingModal'
 import AssetPhotoCards from './AssetPhotoCards'
+import AssetPhotoPane from './AssetPhotoPane'
 import AssetTypeTabs from './AssetTypeTabs'
 import Menu from './Menu'
 import NewSlideCard from './NewSlideCard'
@@ -17,6 +18,7 @@ import SlideListPane from './SlideListPane'
 export {
   AssetDeletingModal,
   AssetPhotoCards,
+  AssetPhotoPane,
   AssetTypeTabs,
   Menu,
   NewSlideCard,

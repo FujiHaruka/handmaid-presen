@@ -16,6 +16,7 @@ const PhotoDragger = ({
 }) => (
   <div className='PhotoDragger'>
     <Dragger
+      className='PhotoDragger-dragger'
       name='uploading-file'
       multiple={false}
       // ここに保存処理を入れる
@@ -30,7 +31,7 @@ const PhotoDragger = ({
         <Icon type='inbox' />
       </p>
       <p className='ant-upload-text'>
-        Click or drag file to this area to save a photo
+        Click or drag a file to save a photo
       </p>
     </Dragger>
   </div>
