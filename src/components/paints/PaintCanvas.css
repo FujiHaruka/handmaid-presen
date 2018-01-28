@@ -1,0 +1,19 @@
+.PaintCanvas {
+	position: relative;
+	overflow: hidden;
+	margin-top: 6px;
+	border: 1px solid #aaa;
+	resize: both;
+	box-sizing: content-box;
+}
+
+#PaintCanvas-main {
+	position: relative;
+	z-index: 1;
+}
+#PaintCanvas-hidden {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}

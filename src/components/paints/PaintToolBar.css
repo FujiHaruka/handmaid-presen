@@ -1,0 +1,17 @@
+.PaintToolbar-button {
+	display: inline-block;
+	margin-right: 8px;
+}
+
+.PaintToolbar-message {
+	display: inline-block;
+	position: relative;
+	font-size: 0.9em;
+	height: 36px;
+	color: #e27171;
+}
+
+.PaintToolbar-message-inner {
+	position: absolute;
+	bottom: 3px;
+}

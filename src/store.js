@@ -4,6 +4,7 @@ import {
   assetStore,
   slideStore,
   viewStore,
+  paintStore,
 } from './stores'
 import {ViewPage} from './Consts'
 
@@ -39,4 +40,5 @@ export const connecStore = compose(
   slideStore,
   viewStore,
   customActions,
+  paintStore,
 )

@@ -11,6 +11,8 @@ import AssetTypeTabs from './AssetTypeTabs'
 import AssetVideoPane from './AssetVideoPane'
 import Menu from './Menu'
 import NewSlideCard from './NewSlideCard'
+import PaintCanvas from './paints/PaintCanvas'
+import PaintToolBar from './paints/PaintToolBar'
 import PhotoDragger from './PhotoDragger'
 import SlideCard from './SlideCard'
 import SlideEditPane from './SlideEditPane'
@@ -24,6 +26,8 @@ export {
   AssetVideoPane,
   Menu,
   NewSlideCard,
+  PaintCanvas,
+  PaintToolBar,
   PhotoDragger,
   SlideCard,
   SlideEditPane,
