@@ -25,10 +25,14 @@
   },
   "scripts": {
     "preinstall": "./misc/mustInstallByNpm.js",
+    "prepare": "electron-rebuild",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "coz": "coz render src/**/.*.bud"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.7.3"
   }
 }

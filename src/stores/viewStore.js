@@ -1,12 +1,16 @@
 import {updaterOf} from '../helpers'
 import {asStore} from '../wrappers'
-import {ViewPage} from '../Consts'
+import {
+  ViewPage,
+  AssetPageTab,
+} from '../Consts'
 
 class ViewStore {
   static initial (props) {
     return {
-      viewPage: ViewPage.EDIT_PAGE,
+      viewPage: ViewPage.ASSET_PAGE,
       edittingSlide: null,
+      assetTabKey: AssetPageTab.PHOTO,
     }
   }
 
@@ -17,6 +21,7 @@ class ViewStore {
   static updaters = {
     setViewPage: updaterOf('viewPage'),
     setEdittingSlide: updaterOf('edittingSlide'),
+    setAssetTabKey: updaterOf('assetTabKey'),
   }
 
   static actions = {

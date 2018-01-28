@@ -51,7 +51,8 @@ class ModelBase {
 
   async create (data) {
     const id = uid()
-    const created = {id, ...data}
+    const createdAt = Date.now()
+    const created = {id, createdAt, ...data}
     await this.update({[id]: created})
     return created
   }

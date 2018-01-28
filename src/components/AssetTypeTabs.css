@@ -1,0 +1,10 @@
+.AssetTypeTabs {
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.AssetTypeTabs-icon {
+  margin-right: 6px;
+}

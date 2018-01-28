@@ -9,3 +9,12 @@ export const AssetType = {
   VIDEO: 'video',
   PHOTO: 'photo',
 }
+
+export const AssetPageTab = {
+  VIDEO: 'video',
+  PHOTO: 'photo',
+}
+
+export const ProjectDirs = {
+  ASSETS: 'assets',
+}
