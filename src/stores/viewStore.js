@@ -5,12 +5,16 @@ import {
   AssetPageTab,
 } from '../Consts'
 
+const {ok} = window.require('assert')
+
 class ViewStore {
   static initial (props) {
     return {
       viewPage: ViewPage.ASSET_PAGE,
       edittingSlide: null,
       assetTabKey: AssetPageTab.PHOTO,
+      visibleAssetDeletingModal: false,
+      deletingAsset: null,
     }
   }
 
@@ -22,10 +26,16 @@ class ViewStore {
     setViewPage: updaterOf('viewPage'),
     setEdittingSlide: updaterOf('edittingSlide'),
     setAssetTabKey: updaterOf('assetTabKey'),
+    setVisibleAssetDeletingModal: updaterOf('visibleAssetDeletingModal'),
+    setDeletingAsset: updaterOf('deletingAsset'),
   }
 
   static actions = {
-
+    prepareDeleteAsset: ({setVisibleAssetDeletingModal, setDeletingAsset}) => (asset) => {
+      ok(asset.id)
+      setDeletingAsset(asset)
+      setVisibleAssetDeletingModal(true)
+    }
   }
 }
 

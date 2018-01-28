@@ -2,6 +2,7 @@ import {updaterOf, syncFromDb, uid} from '../helpers'
 import {asStore} from '../wrappers'
 import {Asset} from '../models'
 import {ProjectDirs, AssetType} from '../Consts'
+import promisify from 'es6-promisify'
 
 const fs = window.require('fs')
 const mkdirp = (path) => new Promise((resolve) => {
@@ -15,6 +16,7 @@ const copy = (src, dest) => new Promise((resolve, reject) => {
   write.on('close', resolve)
   read.pipe(write)
 })
+const unlink = promisify(fs.unlink)
 const {join, extname} = window.require('path')
 
 const {ok} = require('assert')
@@ -61,7 +63,7 @@ class AssetStore {
       })
       return created
     },
-    removeAsset: ({assets, setAsset}) => async (id) => {
+    deleteAsset: ({assets, setAsset}) => async (id) => {
       const asset = assets[id]
       if (!asset) {
         throw new Error(`No such asset as id = "${id}"`)
@@ -71,6 +73,8 @@ class AssetStore {
         set: setAsset,
         db: Asset
       })
+      // TODO hock で処理したいよね
+      await unlink(join(window.globals.projectDir, asset.path))
     },
     addNewPhotoAsAsset: ({assets, setAsset}) => async (srcPath) => {
       const {projectDir} = window.globals

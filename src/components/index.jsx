@@ -4,6 +4,7 @@
  */
 'use strict'
 
+import AssetDeletingModal from './AssetDeletingModal'
 import AssetPhotoCards from './AssetPhotoCards'
 import AssetTypeTabs from './AssetTypeTabs'
 import Menu from './Menu'
@@ -14,6 +15,7 @@ import SlideEditPane from './SlideEditPane'
 import SlideListPane from './SlideListPane'
 
 export {
+  AssetDeletingModal,
   AssetPhotoCards,
   AssetTypeTabs,
   Menu,

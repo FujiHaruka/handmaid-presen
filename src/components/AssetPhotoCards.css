@@ -12,3 +12,22 @@
   width: 320px;
   height: 180px;
 }
+
+.AssetPhotoCard-cover {
+  position: relative;
+}
+
+.AssetPhotoCard-img {
+}
+
+.AssetPhotoCard-delete {
+  position: absolute;
+  display: block;
+  top: 16px;
+  right: 16px;
+  font-size: 2em;
+  color: #444;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}

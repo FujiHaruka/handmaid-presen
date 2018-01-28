@@ -5,6 +5,7 @@ import {
   AssetTypeTabs,
   PhotoDragger,
   AssetPhotoCards,
+  AssetDeletingModal,
 } from '../components'
 
 class AssetView extends Component {
@@ -14,7 +15,12 @@ class AssetView extends Component {
       assetVideos,
       assetTabKey,
       setAssetTabKey,
+      deletingAsset,
+      visibleAssetDeletingModal,
+      setVisibleAssetDeletingModal,
       addNewPhotoAsAsset,
+      prepareDeleteAsset,
+      commitDeletingAsset,
     } = this.props
     return (
       <div className='AssetView'>
@@ -30,9 +36,16 @@ class AssetView extends Component {
         </div>
         <div>
           <AssetPhotoCards
-            {...{assetPhotos}}
+            {...{assetPhotos, prepareDeleteAsset}}
           />
         </div>
+
+        <AssetDeletingModal
+          asset={deletingAsset}
+          visible={visibleAssetDeletingModal}
+          onDelete={commitDeletingAsset}
+          onCancel={() => setVisibleAssetDeletingModal(false)}
+        />
       </div>
     )
   }

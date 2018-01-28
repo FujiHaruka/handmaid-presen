@@ -59,7 +59,7 @@ class ModelBase {
 
   async delete (key) {
     this._assertData()
-    this.data = omit(key)(this.data)
+    this.data = omit([key])(this.data)
     await this._sync()
   }
 
