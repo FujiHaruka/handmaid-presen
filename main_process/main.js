@@ -5,6 +5,11 @@ const { app, BrowserWindow, protocol } = electron
 const path = require('path')
 const fs = require('fs')
 const {join, resolve} = require('path')
+const serve = require('serve')
+const {
+  ASSETS_SERVER_PORT,
+  DEV_SERVER_PORT,
+} = require('../src/conf')
 
 const usage = fs.readFileSync(join(__dirname, '../doc/usage.txt')).toString()
 
@@ -22,6 +27,12 @@ if (!projectDir) {
 }
 projectDir = resolve(projectDir)
 
+// Serve project assets
+const server = serve(projectDir, {
+  port: ASSETS_SERVER_PORT,
+  ignore: ['node_modules']
+})
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -37,7 +48,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   const query = `projectDir=${projectDir}`
-  const url = process.env.NODE_ENV === 'development' ? `http://localhost:3000?${query}` : `file:///index.html?${query}`
+  const url = process.env.NODE_ENV === 'development' ? `http://localhost:${DEV_SERVER_PORT}?${query}` : `file:///index.html?${query}`
   win.loadURL(url)
 
   // Open the DevTools.
@@ -75,6 +86,7 @@ app.on('ready', createWindow)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
+  serve.stop()
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {

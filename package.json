@@ -19,6 +19,7 @@
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.0",
     "recompose": "^0.26.0",
+    "serve": "^6.4.9",
     "sort-keys": "^2.0.0",
     "the-templates": "^2.4.3",
     "uuid": "^3.2.1"

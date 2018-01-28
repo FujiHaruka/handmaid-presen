@@ -2,9 +2,7 @@ import './AssetPhotoCards.css'
 import React from 'react'
 import {pure} from 'recompose'
 import {Card, Icon} from 'antd'
-
-const {nativeImage} = window.require('electron')
-const {join} = window.require('path')
+import {Ports} from '../Consts'
 
 const PHOTO_CARD_WIDTH = 320
 const PHOTO_CARD_HEIGHT = 180
@@ -15,19 +13,13 @@ const AssetPhotoCard = pure(
     prepareDeleteAsset,
   }) => {
     const {path} = photo
-    // TODO もっといい方法はない？
-    const image = nativeImage.createFromPath(join(window.globals.projectDir, path))
-    const dataUrl = image.resize({
-      width: PHOTO_CARD_WIDTH,
-      height: PHOTO_CARD_HEIGHT,
-      quelity: 'good'
-    }).toDataURL()
+    const url = `http://localhost:${Ports.ASSETS_SERVER_PORT}/${path}`
     return (
       <Card
         className='AssetPhotoCard'
         cover={
           <div className='AssetPhotoCard-cover'>
-            <img className='AssetPhotoCard-img' width={PHOTO_CARD_WIDTH} height={PHOTO_CARD_HEIGHT} src={dataUrl} />
+            <img className='AssetPhotoCard-img' width={PHOTO_CARD_WIDTH} height={PHOTO_CARD_HEIGHT} src={url} />
             <Icon className='AssetPhotoCard-delete' type='close' onClick={() => prepareDeleteAsset(photo)} />
           </div>
         }
