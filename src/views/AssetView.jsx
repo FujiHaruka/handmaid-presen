@@ -4,6 +4,7 @@ import {asView} from '../wrappers'
 import {
   AssetTypeTabs,
   AssetPhotoPane,
+  AssetDeletingModal,
 } from '../components'
 import {AssetType} from '../Consts'
 
@@ -13,6 +14,10 @@ class AssetView extends Component {
     const {
       assetTabKey,
       setAssetTabKey,
+      deletingAsset,
+      visibleAssetDeletingModal,
+      commitDeletingAsset,
+      setVisibleAssetDeletingModal,
     } = props
     return (
       <div className='AssetView'>
@@ -21,6 +26,13 @@ class AssetView extends Component {
           onChange={setAssetTabKey}
         />
         <AssetPhotoPane if={assetTabKey === AssetType.PHOTO} {...props} />
+
+        <AssetDeletingModal
+          asset={deletingAsset}
+          visible={visibleAssetDeletingModal}
+          onDelete={commitDeletingAsset}
+          onCancel={() => setVisibleAssetDeletingModal(false)}
+        />
       </div>
     )
   }
