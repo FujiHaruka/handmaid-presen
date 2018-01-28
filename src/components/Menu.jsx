@@ -19,6 +19,9 @@ function Menu ({
       <Item key={ViewPage.EDIT_PAGE}>
         Edit
       </Item>
+      <Item key={ViewPage.ASSET_PAGE}>
+        Asset
+      </Item>
       <Item key={ViewPage.PRESENTATION_PAGE}>
         Presentation
       </Item>

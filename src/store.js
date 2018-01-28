@@ -1,15 +1,15 @@
 import {compose, withHandlers} from 'recompose'
 import {
   projectStore,
-  mediaStore,
+  assetStore,
   slideStore,
   viewStore,
 } from './stores'
 
 const customActions = withHandlers({
-  prepareNewSlide: ({appendSlide, addMedia, setEdittingSlide}) => async () => {
+  prepareNewSlide: ({appendSlide, addAsset, setEdittingSlide}) => async () => {
     const slide = await appendSlide({
-      mediaId: null
+      assetId: null
     })
     setEdittingSlide(slide)
   }
@@ -17,7 +17,7 @@ const customActions = withHandlers({
 
 export const connecStore = compose(
   projectStore,
-  mediaStore,
+  assetStore,
   slideStore,
   viewStore,
   customActions,

@@ -1,9 +1,9 @@
 import Project from './Project'
-import Media from './Media'
+import Asset from './Asset'
 import Slide from './Slide'
 
 export {
   Project,
   Slide,
-  Media,
+  Asset,
 }

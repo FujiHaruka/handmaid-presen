@@ -11,10 +11,10 @@ class SlideStore {
   }
 
   static computed (props) {
-    const {slidesRaw, medias} = props
+    const {slidesRaw, assets} = props
     const slides = map((slide) => ({
       ...slide,
-      media: medias[slide.mediaId] || null
+      asset: assets[slide.assetId] || null
     }))(slidesRaw)
     const slidesArray = Object.keys(slides)
       .map((id) => slides[id])

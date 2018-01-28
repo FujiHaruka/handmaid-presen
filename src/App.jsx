@@ -3,10 +3,11 @@ import './App.css'
 import {
   EditView,
   SettingView,
-  PresentationView
+  PresentationView,
+  AssetView,
 } from './views'
 import {
-  Menu
+  Menu,
 } from './components'
 import {Layout} from 'antd'
 import {ViewPage} from './Consts'
@@ -22,6 +23,8 @@ const View = (props) => {
       return <EditView {...props} />
     case ViewPage.PRESENTATION_PAGE:
       return <PresentationView {...props} />
+    case ViewPage.ASSET_PAGE:
+      return <AssetView {...props} />
     default:
       throw new Error(`No such view page as ${props.viewPage}`)
   }
@@ -49,7 +52,7 @@ class App extends Component {
   async componentDidMount () {
     const {
       syncProject,
-      syncMedia,
+      syncAsset,
       syncSlide,
     } = this.props
     await syncProject()
@@ -57,7 +60,7 @@ class App extends Component {
     if (!projectName) {
       setViewPage(ViewPage.SETTINGS_PAGE)
     }
-    await syncMedia()
+    await syncAsset()
     await syncSlide()
   }
 }
