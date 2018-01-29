@@ -134,11 +134,17 @@ class PaintCanvas extends Component {
     if (!mediaRecorder) {
       return
     }
-    mediaRecorder.onstop = () => {
+    mediaRecorder.onstop = async () => {
+      props.setSavingPaintVideo(true)
       const {Blob} = window
       const blob = new Blob(this.recordedBlobs, {type: 'video/webm'})
-      props.addNewVideoAsAsset(blob)
-        .catch((e) => { throw e })
+      try {
+        await props.addNewVideoAsAsset(blob)
+      } catch (e) {
+        throw e
+      } finally {
+        props.setSavingPaintVideo(false)
+      }
       // clean up
       this.recordedBlobs = []
       this.mediaRecorder = null

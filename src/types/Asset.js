@@ -3,6 +3,7 @@ const Asset = {
   assetType: String,
   path: String,
   createdAt: Number,
+  thumbnailPath: String || null,
 }
 
 export default Asset

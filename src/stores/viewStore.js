@@ -16,6 +16,7 @@ class ViewStore {
       visibleAssetDeletingModal: false,
       visibleHeader: true,
       deletingAsset: null,
+      savingPaintVideo: false,
     }
   }
 
@@ -30,6 +31,7 @@ class ViewStore {
     setVisibleAssetDeletingModal: updaterOf('visibleAssetDeletingModal'),
     setVisibleHeader: updaterOf('visibleHeader'),
     setDeletingAsset: updaterOf('deletingAsset'),
+    setSavingPaintVideo: updaterOf('savingPaintVideo'),
   }
 
   static actions = {

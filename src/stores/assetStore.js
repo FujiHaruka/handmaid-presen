@@ -6,6 +6,8 @@ import promisify from 'es6-promisify'
 import toBuffer from 'blob-to-buffer'
 
 const fs = window.require('fs')
+const childProcess = window.require('child_process')
+const {join, extname, resolve} = window.require('path')
 const mkdirp = (path) => new Promise((resolve) => {
   fs.mkdir(path, (e) => resolve())
 })
@@ -19,7 +21,7 @@ const copy = (src, dest) => new Promise((resolve, reject) => {
 })
 const writeFile = promisify(fs.writeFile)
 const unlink = promisify(fs.unlink)
-const {join, extname} = window.require('path')
+const exec = promisify(childProcess.exec)
 const toBufferAsync = promisify(toBuffer)
 
 const {ok} = require('assert')
@@ -77,7 +79,11 @@ class AssetStore {
         db: Asset
       })
       // TODO hock で処理したいよね
-      await unlink(join(window.globals.projectDir, asset.path))
+      const {projectDir} = window.globals
+      await unlink(join(projectDir, asset.path))
+      if (asset.thumbnailPath) {
+        await unlink(projectDir, asset.thumbnailPath)
+      }
     },
     addNewPhotoAsAsset: ({assets, setAsset}) => async (srcPath) => {
       const {projectDir} = window.globals
@@ -101,15 +107,25 @@ class AssetStore {
       ok(blob)
       const {projectDir} = window.globals
       ok(projectDir)
-      const filename = uid() + '.webm'
-      const assetPath = join(ProjectDirs.ASSETS, filename)
-      const assetFullPath = join(projectDir, assetPath)
       await mkdirp(join(projectDir, ProjectDirs.ASSETS))
+      const name = uid()
+      const webmName = name + '.webm'
+      const mp4Name = name + '.mp4'
+      const webmFullPath = join(projectDir, ProjectDirs.ASSETS, webmName)
+      const assetPath = join(ProjectDirs.ASSETS, mp4Name)
+      const assetFullPath = join(projectDir, assetPath)
+      const thumbnailPath = join(ProjectDirs.ASSETS, name + '.jpg')
       const buffer = await toBufferAsync(blob)
-      await writeFile(assetFullPath, buffer)
+
+      await writeFile(webmFullPath, buffer)
+      // FIXME __dirname = '/' となるのでこれだとダメ
+      await exec(resolve(join(__dirname, '../webm_to_mp4.sh')) + ' ' + webmFullPath)
+      await exec(resolve(join(__dirname, '../last_frame_of_video.sh')) + ' ' + assetFullPath)
+
       const created = await Asset.create({
         assetType: AssetType.VIDEO,
         path: assetPath,
+        thumbnailPath
       })
       await syncFromDb({
         set: setAsset,

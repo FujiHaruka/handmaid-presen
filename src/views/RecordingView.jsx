@@ -1,11 +1,20 @@
 import './RecordingView.css'
 import React, {Component} from 'react'
-import {asView} from '../wrappers'
-import {Button} from 'antd'
+import {asView, onlyIf} from '../wrappers'
+import {Button, Spin} from 'antd'
 import {
   PaintToolBar,
   PaintCanvas,
 } from '../components'
+
+const SavingSpin = onlyIf('visible')(() => (
+  <div className='RecordingView-spin-wrapper'>
+    <Spin
+      className='RecordingView-spin'
+      size='large'
+    />
+  </div>
+))
 
 class RecordingView extends Component {
   render () {
@@ -17,6 +26,7 @@ class RecordingView extends Component {
       paintClearing,
       paintRecording,
       paintCurveCoords,
+      savingPaintVideo,
       setPaintDrawing,
       setPaintPrevCoord,
       startPaintClearing,
@@ -26,6 +36,7 @@ class RecordingView extends Component {
       pushPaintCurveCoords,
       clearPaintCurveCoords,
       addNewVideoAsAsset,
+      setSavingPaintVideo,
     } = props
     return (
       <div className='RecordingView'>
@@ -51,7 +62,10 @@ class RecordingView extends Component {
           clearPaintCurveCoords,
           finishPaintClearing,
           addNewVideoAsAsset,
+          setSavingPaintVideo,
         }} />
+
+        <SavingSpin visible={savingPaintVideo} />
       </div>
     )
   }
