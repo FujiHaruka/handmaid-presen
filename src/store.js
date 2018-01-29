@@ -7,8 +7,7 @@ import {
   paintStore,
 } from './stores'
 import {ViewPage} from './Consts'
-
-const {ok} = window.require('assert')
+import {ok} from './helpers/nodejs'
 
 const customActions = withHandlers({
   prepareNewSlide: ({appendSlide, addAsset, setEdittingSlide}) => async () => {

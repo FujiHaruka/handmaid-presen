@@ -1,16 +1,13 @@
-import promisify from 'es6-promisify'
 import {omit} from 'ramda'
 import {uid} from '../helpers'
 import sortKeys from 'sort-keys'
-
-const fs = window.require('fs')
-const assert = window.require('assert')
-const readFile = promisify(fs.readFile)
-const writeFile = promisify(fs.writeFile)
-const existsFile = (path) => new Promise((resolve) => {
-  fs.stat(path, (err) => err ? resolve(false) : resolve(true))
-})
-const {join} = require('path')
+import {
+  readFile,
+  writeFile,
+  existsFile,
+  ok,
+  join,
+} from '../helpers/nodejs'
 
 class ModelBase {
   constructor (name) {
@@ -70,7 +67,7 @@ class ModelBase {
   }
 
   async _assertData () {
-    assert.ok(this.data)
+    ok(this.data)
   }
 }
 

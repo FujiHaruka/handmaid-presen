@@ -4,8 +4,7 @@ import {
   ViewPage,
   AssetPageTab,
 } from '../Consts'
-
-const {ok} = window.require('assert')
+import {ok} from '../helpers/nodejs'
 
 class ViewStore {
   static initial (props) {

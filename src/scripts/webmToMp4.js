@@ -1,12 +1,8 @@
-import promisify from 'es6-promisify'
-
-const fs = window.require('fs')
-const childProcess = window.require('child_process')
-const unlink = promisify(fs.unlink)
-const exec = promisify(childProcess.exec)
-const existsFile = (path) => new Promise((resolve) => {
-  fs.stat(path, (err) => err ? resolve(false) : resolve(true))
-})
+import {
+  unlink,
+  exec,
+  existsFile,
+} from '../helpers/nodejs'
 
 async function webmToMp4 (webmSrc) {
   const mp4Dest = webmSrc.replace(/webm$/, 'mp4')

@@ -6,25 +6,17 @@ import promisify from 'es6-promisify'
 import toBuffer from 'blob-to-buffer'
 import webmToMp4 from '../scripts/webmToMp4'
 import createThumbnailFromLastFrom from '../scripts/createThumbnailFromLastFrom'
+import {
+  copy,
+  writeFile,
+  unlink,
+  mkdirp,
+  join,
+  extname,
+  ok,
+} from '../helpers/nodejs'
 
-const fs = window.require('fs')
-const {join, extname} = window.require('path')
-const mkdirp = (path) => new Promise((resolve) => {
-  fs.mkdir(path, (e) => resolve())
-})
-const copy = (src, dest) => new Promise((resolve, reject) => {
-  const read = fs.createReadStream(src)
-  const write = fs.createWriteStream(dest)
-  read.on('error', reject)
-  write.on('error', reject)
-  write.on('close', resolve)
-  read.pipe(write)
-})
-const writeFile = promisify(fs.writeFile)
-const unlink = promisify(fs.unlink)
 const toBufferAsync = promisify(toBuffer)
-
-const {ok} = require('assert')
 
 class AssetStore {
   static initial (props) {
