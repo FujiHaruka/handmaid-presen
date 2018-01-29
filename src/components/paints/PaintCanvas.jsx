@@ -1,5 +1,10 @@
 import './PaintCanvas.css'
 import React, {Component} from 'react'
+import toBuffer from 'blob-to-buffer'
+import {ProjectDirs} from '../../Consts'
+
+const fs = window.require('fs')
+const {join} = window.require('path')
 
 const enabledOf = (name) => (prev, next) => !prev[name] && next[name]
 const disabledOf = (name) => (prev, next) => prev[name] && !next[name]
@@ -53,7 +58,7 @@ class PaintCanvas extends Component {
       this.startRecord()
     }
     if (whenFinishRecording(prevProps, props)) {
-      this.stopRecordAndDownload()
+      this.stopRecordAndSave()
     }
   }
 
@@ -129,21 +134,16 @@ class PaintCanvas extends Component {
     this.mediaRecorder = mediaRecorder
   }
 
-  stopRecordAndDownload () {
-    const {mediaRecorder} = this
+  stopRecordAndSave () {
+    const {mediaRecorder, props} = this
     if (!mediaRecorder) {
       return
     }
     mediaRecorder.onstop = () => {
-      const {Blob, URL} = window
+      const {Blob} = window
       const blob = new Blob(this.recordedBlobs, {type: 'video/webm'})
-      const dataUrl = URL.createObjectURL(blob)
-      // download
-      const anchor = document.createElement('a')
-      const now = new Date()
-      anchor.href = dataUrl
-      anchor.download = `canvas_${now.getFullYear()}_${now.getMonth() + 1}_${now.getDate()}_${now.getHours()}_${now.getMinutes()}_${now.getSeconds()}.webm`
-      anchor.click()
+      props.addNewVideoAsAsset(blob)
+        .catch((e) => { throw e })
       // clean up
       this.recordedBlobs = []
       this.mediaRecorder = null

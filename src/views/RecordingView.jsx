@@ -25,6 +25,7 @@ class RecordingView extends Component {
       finishPaintRecording,
       pushPaintCurveCoords,
       clearPaintCurveCoords,
+      addNewVideoAsAsset,
     } = props
     return (
       <div className='RecordingView'>
@@ -49,6 +50,7 @@ class RecordingView extends Component {
           pushPaintCurveCoords,
           clearPaintCurveCoords,
           finishPaintClearing,
+          addNewVideoAsAsset,
         }} />
       </div>
     )

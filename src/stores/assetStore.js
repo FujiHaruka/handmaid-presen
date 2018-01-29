@@ -3,6 +3,7 @@ import {asStore} from '../wrappers'
 import {Asset} from '../models'
 import {ProjectDirs, AssetType} from '../Consts'
 import promisify from 'es6-promisify'
+import toBuffer from 'blob-to-buffer'
 
 const fs = window.require('fs')
 const mkdirp = (path) => new Promise((resolve) => {
@@ -16,8 +17,10 @@ const copy = (src, dest) => new Promise((resolve, reject) => {
   write.on('close', resolve)
   read.pipe(write)
 })
+const writeFile = promisify(fs.writeFile)
 const unlink = promisify(fs.unlink)
 const {join, extname} = window.require('path')
+const toBufferAsync = promisify(toBuffer)
 
 const {ok} = require('assert')
 
@@ -86,14 +89,34 @@ class AssetStore {
       await copy(srcPath, assetFullPath)
       const created = await Asset.create({
         assetType: AssetType.PHOTO,
-        path: assetPath
+        path: assetPath,
       })
       await syncFromDb({
         set: setAsset,
-        db: Asset
+        db: Asset,
       })
       return created
-    }
+    },
+    addNewVideoAsAsset: ({assets, setAsset}) => async (blob) => {
+      ok(blob)
+      const {projectDir} = window.globals
+      ok(projectDir)
+      const filename = uid() + '.webm'
+      const assetPath = join(ProjectDirs.ASSETS, filename)
+      const assetFullPath = join(projectDir, assetPath)
+      await mkdirp(join(projectDir, ProjectDirs.ASSETS))
+      const buffer = await toBufferAsync(blob)
+      await writeFile(assetFullPath, buffer)
+      const created = await Asset.create({
+        assetType: AssetType.VIDEO,
+        path: assetPath,
+      })
+      await syncFromDb({
+        set: setAsset,
+        db: Asset,
+      })
+      return created
+    },
   }
 }
 
