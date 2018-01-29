@@ -1,5 +1,6 @@
 import './PaintCanvas.css'
 import React, {Component} from 'react'
+import {message} from 'antd'
 
 const enabledOf = (name) => (prev, next) => !prev[name] && next[name]
 const disabledOf = (name) => (prev, next) => prev[name] && !next[name]
@@ -140,8 +141,10 @@ class PaintCanvas extends Component {
       const blob = new Blob(this.recordedBlobs, {type: 'video/webm'})
       try {
         await props.addNewVideoAsAsset(blob)
+        message.success('Video saved.')
       } catch (e) {
-        throw e
+        message.error('Failed to save video.')
+        console.error(e)
       } finally {
         props.setSavingPaintVideo(false)
       }

@@ -8,6 +8,7 @@ import {
 } from './stores'
 import {ViewPage} from './Consts'
 import {ok} from './helpers/nodejs'
+import {message} from 'antd'
 
 const customActions = withHandlers({
   prepareNewSlide: ({appendSlide, addAsset, setEdittingSlide}) => async () => {
@@ -27,7 +28,13 @@ const customActions = withHandlers({
   commitDeletingAsset: ({deletingAsset, setDeletingAsset, deleteAsset, setVisibleAssetDeletingModal}) => async () => {
     const {id} = deletingAsset
     ok(id)
-    await deleteAsset(id)
+    try {
+      await deleteAsset(id)
+      message.success(`Asset deleted.`)
+    } catch (e) {
+      message.error(`Failed to delete asset "${id}".`)
+      console.error(e)
+    }
     setDeletingAsset(null)
     setVisibleAssetDeletingModal(false)
   },

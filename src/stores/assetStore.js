@@ -74,7 +74,7 @@ class AssetStore {
       const {projectDir} = window.globals
       await unlink(join(projectDir, asset.path))
       if (asset.thumbnailPath) {
-        await unlink(projectDir, asset.thumbnailPath)
+        await unlink(join(projectDir, asset.thumbnailPath))
       }
     },
     addNewPhotoAsAsset: ({assets, setAsset}) => async (srcPath) => {
