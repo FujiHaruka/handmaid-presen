@@ -15,7 +15,7 @@ const SKIP_FOR_SMOOTH = 4
 class PaintCanvas extends Component {
   render () {
     return (
-      <div class='PaintCanvas'>
+      <div className='PaintCanvas'>
         <canvas
           id='PaintCanvas-main'
           width={CANVAS_WIDTH}

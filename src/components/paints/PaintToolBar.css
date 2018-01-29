@@ -1,9 +1,10 @@
-.PaintToolbar-button {
+.PaintToolBar-button {
 	display: inline-block;
 	margin-right: 8px;
+	margin-left: 8px;
 }
 
-.PaintToolbar-message {
+.PaintToolBar-message {
 	display: inline-block;
 	position: relative;
 	font-size: 0.9em;
@@ -11,7 +12,7 @@
 	color: #e27171;
 }
 
-.PaintToolbar-message-inner {
+.PaintToolBar-message-inner {
 	position: absolute;
 	bottom: 3px;
 }

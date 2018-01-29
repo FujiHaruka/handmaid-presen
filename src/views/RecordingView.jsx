@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {asView} from '../wrappers'
 import {Button} from 'antd'
 import {
-  PaintToolbar,
+  PaintToolBar,
   PaintCanvas,
 } from '../components'
 
@@ -32,7 +32,7 @@ class RecordingView extends Component {
           <Button shape='circle' icon='left' onClick={quitRecordingView} />
         </div>
 
-        <PaintToolbar {...{
+        <PaintToolBar {...{
           paintRecording,
           startPaintRecording,
           finishPaintRecording,

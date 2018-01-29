@@ -1,32 +1,35 @@
+import './PaintToolBar.css'
+import React from 'react'
 import {pure} from 'recompose'
-import Button from 'antd'
+import {Button} from 'antd'
 
-const PaintToolbar = ({
+const PaintToolBar = ({
   paintRecording,
   startPaintRecording,
   finishPaintRecording,
   startPaintClearing,
 }) => (
-  <div class='PaintToolbar'>
-    <span class='PaintToolbar-button'>
+  <div className='PaintToolBar'>
+    <span className='PaintToolBar-button'>
       <Button
-        primary
+        type='primary'
         onClick={paintRecording ? finishPaintRecording : startPaintRecording}
       >
         {paintRecording ? 'FINISH' : 'RECORD'}
       </Button>
     </span>
-    <span class='PaintToolbar-button'>
-      <Button stroked onClick={startPaintClearing}>
+    <span className='PaintToolBar-button'>
+      <Button
+        onClick={startPaintClearing}>
         CLEAR
       </Button>
     </span>
-    <span class='PaintToolbar-message'>
-      <span class='PaintToolbar-message-inner'>
+    <span className='PaintToolBar-message'>
+      <span className='PaintToolBar-message-inner'>
         {paintRecording && 'Recording...'}
       </span>
     </span>
   </div>
 )
 
-export default pure(PaintToolbar)
+export default pure(PaintToolBar)
