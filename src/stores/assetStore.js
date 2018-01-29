@@ -4,10 +4,11 @@ import {Asset} from '../models'
 import {ProjectDirs, AssetType} from '../Consts'
 import promisify from 'es6-promisify'
 import toBuffer from 'blob-to-buffer'
+import webmToMp4 from '../scripts/webmToMp4'
+import createThumbnailFromLastFrom from '../scripts/createThumbnailFromLastFrom'
 
 const fs = window.require('fs')
-const childProcess = window.require('child_process')
-const {join, extname, resolve} = window.require('path')
+const {join, extname} = window.require('path')
 const mkdirp = (path) => new Promise((resolve) => {
   fs.mkdir(path, (e) => resolve())
 })
@@ -21,7 +22,6 @@ const copy = (src, dest) => new Promise((resolve, reject) => {
 })
 const writeFile = promisify(fs.writeFile)
 const unlink = promisify(fs.unlink)
-const exec = promisify(childProcess.exec)
 const toBufferAsync = promisify(toBuffer)
 
 const {ok} = require('assert')
@@ -118,9 +118,8 @@ class AssetStore {
       const buffer = await toBufferAsync(blob)
 
       await writeFile(webmFullPath, buffer)
-      // FIXME __dirname = '/' となるのでこれだとダメ
-      await exec(resolve(join(__dirname, '../webm_to_mp4.sh')) + ' ' + webmFullPath)
-      await exec(resolve(join(__dirname, '../last_frame_of_video.sh')) + ' ' + assetFullPath)
+      await webmToMp4(webmFullPath)
+      await createThumbnailFromLastFrom(assetFullPath)
 
       const created = await Asset.create({
         assetType: AssetType.VIDEO,
