@@ -1,10 +1,5 @@
 import './PaintCanvas.css'
 import React, {Component} from 'react'
-import toBuffer from 'blob-to-buffer'
-import {ProjectDirs} from '../../Consts'
-
-const fs = window.require('fs')
-const {join} = window.require('path')
 
 const enabledOf = (name) => (prev, next) => !prev[name] && next[name]
 const disabledOf = (name) => (prev, next) => prev[name] && !next[name]

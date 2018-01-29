@@ -2,7 +2,7 @@ import './AssetListCards.css'
 import React from 'react'
 import {pure} from 'recompose'
 import {Card, Icon} from 'antd'
-import {Ports} from '../Consts'
+import {Ports, AssetType} from '../Consts'
 
 const CARD_WIDTH = 320
 const CARD_HEIGHT = 180
@@ -12,14 +12,23 @@ const AssetCard = pure(
     asset,
     prepareDeleteAsset,
   }) => {
-    const {path} = asset
+    const {path, assetType} = asset
     const url = `http://localhost:${Ports.ASSETS_SERVER_PORT}/${path}`
+    const mediaProps = {
+      width: CARD_WIDTH,
+      height: CARD_HEIGHT,
+      src: url,
+    }
     return (
       <Card
         className='AssetCard'
         cover={
           <div className='AssetCard-cover'>
-            <img className='AssetCard-img' width={CARD_WIDTH} height={CARD_HEIGHT} src={url} />
+            {
+              assetType === AssetType.PHOTO
+                ? <img className='AssetCard-img' {...mediaProps} alt='asset card' />
+                : <video className='AssetCard-video' {...mediaProps} preload='metadata' controls />
+            }
             <Icon className='AssetCard-delete' type='close' onClick={() => prepareDeleteAsset(asset)} />
           </div>
         }
