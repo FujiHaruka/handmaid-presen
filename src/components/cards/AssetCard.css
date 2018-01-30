@@ -1,0 +1,55 @@
+.AssetCard {
+  margin: 8px;
+  box-sizing: content-box;
+}
+
+.AssetCard-cover {
+  position: relative;
+}
+
+.AssetCard-img {
+}
+
+.AssetCard-video-wrap {
+  display: relative;
+}
+
+.AssetCard-video {
+  z-index: 1;
+}
+
+.AssetCard-video-thumbnail {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AssetCard-video-thumbnail-icon {
+  display: inline-block;
+  z-index: 2;
+  font-size: 48px;
+  color: #40a9ff;
+}
+.AssetCard-video-thumbnail-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+
+.AssetCard-delete {
+  position: absolute;
+  display: block;
+  top: 16px;
+  right: 16px;
+  font-size: 2em;
+  color: #444;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
