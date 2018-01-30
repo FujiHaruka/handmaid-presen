@@ -12,6 +12,13 @@
   height: 103px;
 }
 
+.SlideCard-nocontent {
+  text-align: center;
+  line-height: 51px;
+  color: #ccc;
+  font-weight: 100;
+}
+
 .SlideCard-card-highlight {
   border-color: #1890ff;
   border-width: 2px;

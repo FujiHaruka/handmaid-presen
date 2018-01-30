@@ -3,6 +3,7 @@ import React from 'react'
 import {pure, withState} from 'recompose'
 import {Card, Icon} from 'antd'
 import {Ports, AssetType} from '../../Consts'
+import c from 'classnames'
 
 const CARD_WIDTH = 320
 const CARD_HEIGHT = 180
@@ -19,20 +20,28 @@ const VideoCardContent = withState('visibleThumbnail', 'toggleVisibleThumbnail',
     thumbnail,
     visibleThumbnail,
     toggleVisibleThumbnail,
+    thumbnailOnly,
   }) => (
     <div className='AssetCard-video-wrap'>
       {
         visibleThumbnail &&
         <div className='AssetCard-video-thumbnail' style={sizeStyle({width, height})}>
-          <Icon type='play-circle-o' className='AssetCard-video-thumbnail-icon' />
+          {
+            !thumbnailOnly &&
+            <Icon type='play-circle-o' className='AssetCard-video-thumbnail-icon' />
+          }
           <img
             className='AssetCard-video-thumbnail-img'
             src={thumbnail}
             onClick={() => toggleVisibleThumbnail(false)} {...{width, height}}
+            alt='asset video thumbnail'
           />
         </div>
       }
-      <video className='AssetCard-video' preload='metadata' controls {...{width, height, src}} />
+      {
+        !thumbnailOnly &&
+        <video className='AssetCard-video' preload='metadata' controls {...{width, height, src}} />
+      }
     </div>
   )
 )
@@ -44,6 +53,9 @@ const AssetCard = pure(
     height = CARD_HEIGHT,
     asset,
     prepareDeleteAsset, // nullable
+    thumbnailOnly = false,
+    onClick = () => {},
+    className
   }) => {
     const {path, assetType, thumbnailPath} = asset
     const url = toUrl(path)
@@ -53,10 +65,12 @@ const AssetCard = pure(
       height,
       src: url,
       thumbnail: thumbnailUrl,
+      thumbnailOnly,
     }
     return (
       <Card
-        className='AssetCard'
+        onClick={onClick}
+        className={c('AssetCard', className)}
         cover={
           <div className='AssetCard-cover'>
             {
