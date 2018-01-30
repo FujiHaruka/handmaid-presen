@@ -1,8 +1,10 @@
 import './SlideEditPane.css'
 import React from 'react'
+import {pure} from 'recompose'
 import AssetTypeTabs from '../tabs/AssetTypeTabs'
 import AssetPhotoPane from './AssetPhotoPane'
 import AssetVideoPane from './AssetVideoPane'
+import AssetCard from '../cards/AssetCard'
 import {AssetType} from '../../Consts'
 
 const isEmptySlide = (slide) => !slide
@@ -25,11 +27,22 @@ const SelectAssetPane = ({
   </div>
 )
 
+const SlideEdittingPane = ({
+  asset,
+}) => (
+  <div className='SlideEdittingPane'>
+    <AssetCard
+      width={640}
+      height={360}
+      asset={asset}
+    />
+  </div>
+)
+
 const SlideEditPane = ({
   slide = null,
   ...props
 }) => (
-  console.log(slide) ||
   <div className='SlideEditPane'>
     {
       isEmptySlide(slide) && 'select slide'
@@ -37,9 +50,9 @@ const SlideEditPane = ({
     {
       !isEmptySlide(slide) && (isEmptyAsset(slide)
         ? <SelectAssetPane {...props} />
-        : JSON.stringify(slide || {}))
+        : <SlideEdittingPane asset={slide.asset} />)
     }
   </div>
 )
 
-export default SlideEditPane
+export default pure(SlideEditPane)
