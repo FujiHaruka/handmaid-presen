@@ -6,13 +6,20 @@ import SlideCard from '../cards/SlideCard'
 
 const SlideListPane = ({
   slidesArray,
+  edittingSlide,
   prepareNewSlide,
   setEdittingSlide,
 }) => (
   <div className='SlideListPane'>
     {
       slidesArray.map(
-        (slide) => <SlideCard key={slide.id} {...{slide, setEdittingSlide}} />
+        (slide) => (
+          <SlideCard
+            key={slide.id}
+            highlight={edittingSlide && slide.id === edittingSlide.id}
+            {...{slide, setEdittingSlide}}
+          />
+        )
       )
     }
     <NewSlideCard {...{prepareNewSlide}} />

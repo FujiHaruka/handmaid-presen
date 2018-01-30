@@ -23,6 +23,7 @@ class EditView extends Component {
         <Sider className='EditView-sider'>
           <SlideListPane
             {...{
+              edittingSlide,
               slidesArray,
               prepareNewSlide,
               setEdittingSlide,

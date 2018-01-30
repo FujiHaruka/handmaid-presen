@@ -2,11 +2,12 @@ import './SlideCard.css'
 import React from 'react'
 import {pure} from 'recompose'
 import {Card, Icon} from 'antd'
+import c from 'classnames'
 
-const SlideCard = ({slide, setEdittingSlide}) => (
+const SlideCard = ({slide, setEdittingSlide, highlight}) => (
   <div className='SlideCard'>
     <Card
-      className='SlideCard-card'
+      className={c('SlideCard-card', { 'SlideCard-card-highlight': highlight })}
       onClick={() => setEdittingSlide(slide)}
     >
       {slide.id}

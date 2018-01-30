@@ -7,4 +7,12 @@
   cursor: pointer;
   color: #444;
   background: white;
+  /* 200px が基準 */
+  width: 184px;
+  height: 103px;
+}
+
+.SlideCard-card-highlight {
+  border-color: #1890ff;
+  border-width: 2px;
 }
