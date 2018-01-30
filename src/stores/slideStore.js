@@ -2,6 +2,7 @@ import {updaterOf, syncFromDb} from '../helpers'
 import {asStore} from '../wrappers'
 import {Slide} from '../models'
 import {map} from 'ramda'
+import {ok} from '../helpers/nodejs'
 
 class SlideStore {
   static initial (props) {
@@ -47,6 +48,17 @@ class SlideStore {
         db: Slide
       })
       return created
+    },
+    updateSlide: ({setSlidesRaw}) => async (id, slide) => {
+      ok(id)
+      ok(slide)
+      await Slide.update({
+        [id]: slide
+      })
+      await syncFromDb({
+        set: setSlidesRaw,
+        db: Slide
+      })
     },
     insertSlide: ({setSlidesRaw, slidesArray}) => async (slide, index) => {
       if (index > slidesArray.length) {

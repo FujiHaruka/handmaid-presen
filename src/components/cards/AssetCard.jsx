@@ -33,7 +33,8 @@ const VideoCardContent = withState('visibleThumbnail', 'toggleVisibleThumbnail',
           <img
             className='AssetCard-video-thumbnail-img'
             src={thumbnail}
-            onClick={() => toggleVisibleThumbnail(false)} {...{width, height}}
+            onClick={!thumbnailOnly ? () => toggleVisibleThumbnail(false) : undefined}
+            {...{width, height}}
             alt='asset video thumbnail'
           />
         </div>
@@ -65,7 +66,6 @@ const AssetCard = pure(
       height,
       src: url,
       thumbnail: thumbnailUrl,
-      thumbnailOnly,
     }
     return (
       <Card
@@ -76,7 +76,7 @@ const AssetCard = pure(
             {
               assetType === AssetType.PHOTO
                 ? <img className='AssetCard-img' {...mediaProps} alt='asset card' />
-                : <VideoCardContent {...mediaProps} />
+                : <VideoCardContent {...mediaProps} thumbnailOnly={thumbnailOnly} />
             }
             {
               prepareDeleteAsset &&

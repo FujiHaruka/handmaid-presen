@@ -5,15 +5,21 @@ import AssetCard from './AssetCard'
 
 const AssetListCards = ({
   assetList = [],
-  prepareDeleteAsset = () => {},
+  prepareDeleteAsset,
+  onSelect,
+  thumbnailOnly,
 }) => (
   <div className='AssetListCards'>
     {
       assetList.map((asset) =>
         <AssetCard
+          onClick={onSelect && (() => onSelect(asset))}
           key={asset.id}
-          asset={asset}
-          prepareDeleteAsset={prepareDeleteAsset}
+          {...{
+            asset,
+            prepareDeleteAsset,
+            thumbnailOnly,
+          }}
         />
       )
     }

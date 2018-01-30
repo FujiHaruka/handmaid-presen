@@ -9,7 +9,7 @@ import {ok} from '../helpers/nodejs'
 class ViewStore {
   static initial (props) {
     return {
-      viewPage: ViewPage.ASSET_PAGE,
+      viewPage: ViewPage.EDIT_PAGE,
       edittingSlide: null,
       assetTabKey: AssetPageTab.VIDEO,
       visibleAssetDeletingModal: false,

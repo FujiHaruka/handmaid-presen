@@ -17,6 +17,11 @@ class EditView extends Component {
       slidesArray,
       prepareNewSlide,
       setEdittingSlide,
+      assetTabKey,
+      setAssetTabKey,
+      assetPhotos,
+      assetVideos,
+      selectAssetAsSlide,
     } = this.props
     return (
       <Layout className='EditView'>
@@ -33,6 +38,13 @@ class EditView extends Component {
         <Content className='EditView-content'>
           <SlideEditPane
             slide={edittingSlide}
+            {...{
+              assetTabKey,
+              setAssetTabKey,
+              assetPhotos,
+              assetVideos,
+              selectAssetAsSlide,
+            }}
           />
         </Content>
       </Layout>

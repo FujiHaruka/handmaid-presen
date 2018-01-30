@@ -9,6 +9,7 @@ import {
 import {ViewPage} from './Consts'
 import {ok} from './helpers/nodejs'
 import {message} from 'antd'
+import {clone} from 'ramda'
 
 const customActions = withHandlers({
   prepareNewSlide: ({appendSlide, addAsset, setEdittingSlide}) => async () => {
@@ -24,6 +25,16 @@ const customActions = withHandlers({
   quitRecordingView: ({setViewPage, setVisibleHeader}) => async () => {
     setViewPage(ViewPage.ASSET_PAGE)
     setVisibleHeader(true)
+  },
+  selectAssetAsSlide: ({edittingSlide, updateSlide, setEdittingSlide}) => async (asset) => {
+    ok(edittingSlide)
+    ok(asset)
+    const slide = clone(edittingSlide)
+    slide.assetId = asset.id
+    slide.asset = asset
+    updateSlide(slide.id, slide)
+    // やぼい
+    setEdittingSlide(slide)
   },
   commitDeletingAsset: ({deletingAsset, setDeletingAsset, deleteAsset, setVisibleAssetDeletingModal}) => async () => {
     const {id} = deletingAsset

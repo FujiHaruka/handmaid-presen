@@ -26,8 +26,8 @@ class AssetView extends Component {
           activeKey={assetTabKey}
           onChange={setAssetTabKey}
         />
-        <AssetPhotoPane if={assetTabKey === AssetType.PHOTO} {...props} />
-        <AssetVideoPane if={assetTabKey === AssetType.VIDEO} {...props} />
+        <AssetPhotoPane if={assetTabKey === AssetType.PHOTO} {...props} withDragger />
+        <AssetVideoPane if={assetTabKey === AssetType.VIDEO} {...props} withRecordingButton />
 
         <AssetDeletingModal
           asset={deletingAsset}
