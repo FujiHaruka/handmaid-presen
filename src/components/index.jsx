@@ -4,33 +4,33 @@
  */
 'use strict'
 
-import AssetDeletingModal from './AssetDeletingModal'
-import AssetListCards from './AssetListCards'
-import AssetPhotoPane from './AssetPhotoPane'
-import AssetTypeTabs from './AssetTypeTabs'
-import AssetVideoPane from './AssetVideoPane'
-import Menu from './Menu'
-import NewSlideCard from './NewSlideCard'
+import AssetListCards from './cards/AssetListCards'
+import NewSlideCard from './cards/NewSlideCard'
+import SlideCard from './cards/SlideCard'
+import PhotoDragger from './forms/PhotoDragger'
+import Menu from './menus/Menu'
+import AssetDeletingModal from './modals/AssetDeletingModal'
 import PaintCanvas from './paints/PaintCanvas'
 import PaintToolBar from './paints/PaintToolBar'
-import PhotoDragger from './PhotoDragger'
-import SlideCard from './SlideCard'
-import SlideEditPane from './SlideEditPane'
-import SlideListPane from './SlideListPane'
+import AssetPhotoPane from './panes/AssetPhotoPane'
+import AssetVideoPane from './panes/AssetVideoPane'
+import SlideEditPane from './panes/SlideEditPane'
+import SlideListPane from './panes/SlideListPane'
+import AssetTypeTabs from './tabs/AssetTypeTabs'
 
 export {
-  AssetDeletingModal,
   AssetListCards,
-  AssetPhotoPane,
-  AssetTypeTabs,
-  AssetVideoPane,
-  Menu,
   NewSlideCard,
+  SlideCard,
+  PhotoDragger,
+  Menu,
+  AssetDeletingModal,
   PaintCanvas,
   PaintToolBar,
-  PhotoDragger,
-  SlideCard,
+  AssetPhotoPane,
+  AssetVideoPane,
   SlideEditPane,
   SlideListPane,
+  AssetTypeTabs,
 }
 

@@ -1,8 +1,8 @@
 import './AssetVideoPane.css'
 import React from 'react'
 import {Button, Icon} from 'antd'
-import AssetListCards from './AssetListCards'
-import {onlyIf} from '../wrappers'
+import AssetListCards from '../cards/AssetListCards'
+import {onlyIf} from '../../wrappers'
 
 const AssetVideoPane = ({
   assetVideos,

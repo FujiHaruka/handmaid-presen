@@ -1,8 +1,8 @@
 import './AssetPhotoPane.css'
 import React from 'react'
-import PhotoDragger from './PhotoDragger'
-import AssetListCards from './AssetListCards'
-import {onlyIf} from '../wrappers'
+import PhotoDragger from '../forms/PhotoDragger'
+import AssetListCards from '../cards/AssetListCards'
+import {onlyIf} from '../../wrappers'
 
 const AssetPhotoPane = ({
   addNewPhotoAsAsset,

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Menu as AntMenu} from 'antd'
 import {pure} from 'recompose'
-import {ViewPage} from '../Consts'
+import {ViewPage} from '../../Consts'
 
 const {Item} = AntMenu
 

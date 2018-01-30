@@ -2,7 +2,7 @@ import './AssetListCards.css'
 import React from 'react'
 import {pure, withState} from 'recompose'
 import {Card, Icon} from 'antd'
-import {Ports, AssetType} from '../Consts'
+import {Ports, AssetType} from '../../Consts'
 
 const CARD_WIDTH = 320
 const CARD_HEIGHT = 180
@@ -20,7 +20,7 @@ const VideoCardContent = withState('visibleThumbnail', 'toggleVisibleThumbnail',
       {
         visibleThumbnail &&
         <div className='AssetCard-video-thumbnail'>
-          <Icon type='caret-right' className='AssetCard-video-thumbnail-icon' />
+          <Icon type='play-circle-o' className='AssetCard-video-thumbnail-icon' />
           <img
             className='AssetCard-video-thumbnail-img'
             src={thumbnail}

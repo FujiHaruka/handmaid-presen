@@ -2,8 +2,8 @@ import './AssetTypeTabs.css'
 import React from 'react'
 import {Radio, Icon} from 'antd'
 import {pure} from 'recompose'
-import {AssetType} from '../Consts'
-import {eventLink} from '../wrappers'
+import {AssetType} from '../../Consts'
+import {eventLink} from '../../wrappers'
 
 const AssetTypeTabs = ({
   onChange,

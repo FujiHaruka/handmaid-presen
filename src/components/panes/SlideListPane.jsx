@@ -1,8 +1,8 @@
 import './SlideListPane.css'
 import React from 'react'
 import {pure} from 'recompose'
-import NewSlideCard from './NewSlideCard'
-import SlideCard from './SlideCard'
+import NewSlideCard from '../cards/NewSlideCard'
+import SlideCard from '../cards/SlideCard'
 
 const SlideListPane = ({
   slidesArray,
