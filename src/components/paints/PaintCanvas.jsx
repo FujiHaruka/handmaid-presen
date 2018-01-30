@@ -13,6 +13,13 @@ const CANVAS_HEIGHT = 1080
 
 const SKIP_FOR_SMOOTH = 4
 
+const lineStyle = (ctx, settings = {}) => {
+  const {color = '#222'} = settings
+  ctx.lineCap = 'round'
+  ctx.strokeStyle = color
+  ctx.lineWidth = 3
+}
+
 class PaintCanvas extends Component {
   render () {
     return (
@@ -98,9 +105,7 @@ class PaintCanvas extends Component {
 
   drawLine (from, to) {
     const ctx = this.canvasCtx
-    ctx.lineCap = 'round'
-    ctx.strokeStyle = '#222'
-    ctx.lineWidth = 2
+    lineStyle(ctx)
     ctx.beginPath()
     ctx.moveTo(from.x, from.y)
     ctx.lineTo(to.x, to.y)
@@ -167,9 +172,7 @@ class PaintCanvas extends Component {
     const {paintCurveCoords} = this.props
     const skip = SKIP_FOR_SMOOTH * 2
     const points = paintCurveCoords.filter((a, i, array) => i % skip === 0 || i % skip === 1 || i === array.length - 1 || i === array.length - 2)
-    ctx.lineCap = 'round'
-    ctx.strokeStyle = '#222'
-    ctx.lineWidth = 2
+    lineStyle(ctx)
     ctx.beginPath()
     ctx.moveTo(paintCurveCoords[0], paintCurveCoords[1])
     ctx.curve(points, 0.5)

@@ -11,6 +11,7 @@
   margin: 8px;
   width: 320px;
   height: 180px;
+  box-sizing: content-box;
 }
 
 .AssetCard-cover {
@@ -20,8 +21,39 @@
 .AssetCard-img {
 }
 
-.AssetCard-video {
+.AssetCard-video-wrap {
+  display: relative;
 }
+
+.AssetCard-video {
+  z-index: 1;
+}
+
+.AssetCard-video-thumbnail {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 320px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AssetCard-video-thumbnail-icon {
+  display: inline-block;
+  z-index: 2;
+  font-size: 32px;
+  color: #40a9ff;
+}
+.AssetCard-video-thumbnail-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 
 .AssetCard-delete {
   position: absolute;
