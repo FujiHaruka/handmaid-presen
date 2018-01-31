@@ -7,12 +7,13 @@ import {ok} from '../helpers/nodejs'
 class SlideStore {
   static initial (props) {
     return {
-      slidesRaw: {}
+      slidesRaw: {},
+      edittingSlideId: null,
     }
   }
 
   static computed (props) {
-    const {slidesRaw, assets} = props
+    const {slidesRaw, assets, edittingSlideId} = props
     const slides = map((slide) => ({
       ...slide,
       asset: assets[slide.assetId] || null
@@ -20,14 +21,17 @@ class SlideStore {
     const slidesArray = Object.keys(slides)
       .map((id) => slides[id])
       .sort((a, b) => a.index - b.index)
+    const edittingSlide = slides[edittingSlideId] || null
     return {
       slides,
       slidesArray,
+      edittingSlide,
     }
   }
 
   static updaters = {
-    setSlidesRaw: updaterOf('slidesRaw')
+    setSlidesRaw: updaterOf('slidesRaw'),
+    setEdittingSlideId: updaterOf('edittingSlideId'),
   }
 
   static actions = {

@@ -25,3 +25,8 @@ export const ProjectDirs = {
 export const Ports = {
   ASSETS_SERVER_PORT: conf.ASSETS_SERVER_PORT,
 }
+
+export const VIDEO_PLAY_SPEED = {
+  NORMAL: 1.0,
+  FAST: 5.0,
+}

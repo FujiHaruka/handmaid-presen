@@ -8,7 +8,7 @@ const SlideListPane = ({
   slidesArray,
   edittingSlide,
   prepareNewSlide,
-  setEdittingSlide,
+  setEdittingSlideId,
 }) => (
   <div className='SlideListPane'>
     {
@@ -17,7 +17,7 @@ const SlideListPane = ({
           <div key={slide.id} className='SlideListPane-card-wrap'>
             <SlideCard
               highlight={edittingSlide && slide.id === edittingSlide.id}
-              {...{slide, setEdittingSlide}}
+              {...{slide, setEdittingSlideId}}
             />
             <div className='SlideListPane-card-index'>
               {index + 1}

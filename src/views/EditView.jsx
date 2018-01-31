@@ -16,7 +16,7 @@ class EditView extends Component {
       edittingSlide,
       slidesArray,
       prepareNewSlide,
-      setEdittingSlide,
+      setEdittingSlideId,
       assetTabKey,
       setAssetTabKey,
       assetPhotos,
@@ -32,7 +32,7 @@ class EditView extends Component {
               edittingSlide,
               slidesArray,
               prepareNewSlide,
-              setEdittingSlide,
+              setEdittingSlideId,
             }}
           />
         </Sider>

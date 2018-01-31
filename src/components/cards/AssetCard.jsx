@@ -1,6 +1,6 @@
 import './AssetCard.css'
 import React from 'react'
-import {pure, withState, compose, lifecycle} from 'recompose'
+import {pure, withState, compose} from 'recompose'
 import {Card, Icon} from 'antd'
 import {Ports, AssetType} from '../../Consts'
 import c from 'classnames'
@@ -15,48 +15,60 @@ const sizeStyle = ({width, height}) => ({
 const VideoCardContent = compose(
   pure,
   withState('visibleThumbnail', 'toggleVisibleThumbnail', true),
-  lifecycle({
-    componentDidUpdate (prevProps) {
-      const {props} = this
-      if (props.src !== prevProps.src) {
-        props.toggleVisibleThumbnail(true)
-      }
+)(class VideoCardContent extends React.Component {
+  render () {
+    const {
+      width,
+      height,
+      src,
+      thumbnail,
+      visibleThumbnail,
+      toggleVisibleThumbnail,
+      thumbnailOnly,
+    } = this.props
+    return (
+      <div className='AssetCard-video-wrap'>
+        {
+          visibleThumbnail &&
+          <div className='AssetCard-video-thumbnail' style={sizeStyle({width, height})}>
+            {
+              !thumbnailOnly &&
+              <Icon type='play-circle-o' className='AssetCard-video-thumbnail-icon' />
+            }
+            <img
+              className='AssetCard-video-thumbnail-img'
+              src={thumbnail}
+              onClick={!thumbnailOnly ? () => toggleVisibleThumbnail(false) : undefined}
+              {...{width, height}}
+              alt='asset video thumbnail'
+            />
+          </div>
+        }
+        {
+          !thumbnailOnly &&
+          <video className='AssetCard-video' preload='metadata' controls {...{width, height, src}} ref={v => { this.video = v }} />
+        }
+      </div>
+    )
+  }
+
+  componentDidUpdate (prevProps) {
+    const {props} = this
+    if (props.src !== prevProps.src) {
+      props.toggleVisibleThumbnail(true)
     }
-  })
-)(
-  ({
-    width,
-    height,
-    src,
-    thumbnail,
-    visibleThumbnail,
-    toggleVisibleThumbnail,
-    thumbnailOnly,
-  }) => (
-    <div className='AssetCard-video-wrap'>
-      {
-        visibleThumbnail &&
-        <div className='AssetCard-video-thumbnail' style={sizeStyle({width, height})}>
-          {
-            !thumbnailOnly &&
-            <Icon type='play-circle-o' className='AssetCard-video-thumbnail-icon' />
-          }
-          <img
-            className='AssetCard-video-thumbnail-img'
-            src={thumbnail}
-            onClick={!thumbnailOnly ? () => toggleVisibleThumbnail(false) : undefined}
-            {...{width, height}}
-            alt='asset video thumbnail'
-          />
-        </div>
-      }
-      {
-        !thumbnailOnly &&
-        <video className='AssetCard-video' preload='metadata' controls {...{width, height, src}} />
-      }
-    </div>
-  )
-)
+    if (props.playbackRate !== prevProps.playbackRate) {
+      const {playbackRate = 1.0} = props
+      this.video.playbackRate = playbackRate
+    }
+  }
+  componentDidMount () {
+    if (this.video) {
+      const {playbackRate = 1.0} = this.props
+      this.video.playbackRate = playbackRate
+    }
+  }
+})
 
 const toUrl = (path) => `http://localhost:${Ports.ASSETS_SERVER_PORT}/${path}`
 const AssetCard = pure(

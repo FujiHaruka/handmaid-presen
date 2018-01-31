@@ -5,13 +5,13 @@ import {Card} from 'antd'
 import AssetCard from './AssetCard'
 import c from 'classnames'
 
-const SlideCard = ({slide, setEdittingSlide, highlight}) => (
+const SlideCard = ({slide, setEdittingSlideId, highlight}) => (
   <div className='SlideCard'>
     {
       slide.asset
         ? <AssetCard
           className={c('SlideCard-card', { 'SlideCard-card-highlight': highlight })}
-          onClick={() => setEdittingSlide(slide)}
+          onClick={() => setEdittingSlideId(slide.id)}
           thumbnailOnly
           asset={slide.asset}
           width={184}
@@ -19,7 +19,7 @@ const SlideCard = ({slide, setEdittingSlide, highlight}) => (
         />
         : <Card
           className={c('SlideCard-card', { 'SlideCard-card-highlight': highlight }, 'SlideCard-nocontent')}
-          onClick={() => setEdittingSlide(slide)}
+          onClick={() => setEdittingSlideId(slide.id)}
         ><p>no content</p></Card>
     }
   </div>

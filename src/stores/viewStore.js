@@ -10,7 +10,6 @@ class ViewStore {
   static initial (props) {
     return {
       viewPage: ViewPage.EDIT_PAGE,
-      edittingSlide: null,
       assetTabKey: AssetPageTab.VIDEO,
       visibleAssetDeletingModal: false,
       visibleHeader: true,
@@ -25,7 +24,6 @@ class ViewStore {
 
   static updaters = {
     setViewPage: updaterOf('viewPage'),
-    setEdittingSlide: updaterOf('edittingSlide'),
     setAssetTabKey: updaterOf('assetTabKey'),
     setVisibleAssetDeletingModal: updaterOf('visibleAssetDeletingModal'),
     setVisibleHeader: updaterOf('visibleHeader'),

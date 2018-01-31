@@ -12,11 +12,11 @@ import {message} from 'antd'
 import {clone} from 'ramda'
 
 const customActions = withHandlers({
-  prepareNewSlide: ({appendSlide, addAsset, setEdittingSlide}) => async () => {
+  prepareNewSlide: ({appendSlide, addAsset, setEdittingSlideId}) => async () => {
     const slide = await appendSlide({
       assetId: null
     })
-    setEdittingSlide(slide)
+    setEdittingSlideId(slide.id)
   },
   prepareRecording: ({setViewPage, setVisibleHeader}) => async () => {
     setVisibleHeader(false)
@@ -26,21 +26,17 @@ const customActions = withHandlers({
     setViewPage(ViewPage.ASSET_PAGE)
     setVisibleHeader(true)
   },
-  selectAssetAsSlide: ({edittingSlide, updateSlide, setEdittingSlide}) => async (asset = null) => {
+  selectAssetAsSlide: ({edittingSlide, updateSlide, setEdittingSlideId}) => async (asset = null) => {
     ok(edittingSlide)
     const slide = clone(edittingSlide)
     slide.assetId = asset ? asset.id : null
     slide.asset = asset
     updateSlide(slide.id, slide)
-    // やぼい
-    setEdittingSlide(slide)
   },
-  deleteEdittingSlide: ({slidesArray, deleteSlide, setEdittingSlide, edittingSlide}) => async () => {
+  deleteEdittingSlide: ({slidesArray, deleteSlide, setEdittingSlideId, edittingSlide}) => async () => {
     const {id, index} = edittingSlide
     const nextEditting = slidesArray.find((slide) => slide.index === index + 1) || null
-    // やぼい2
-    setEdittingSlide(nextEditting)
-
+    setEdittingSlideId(nextEditting)
     await deleteSlide(id)
   },
   commitDeletingAsset: ({deletingAsset, setDeletingAsset, deleteAsset, setVisibleAssetDeletingModal}) => async () => {
