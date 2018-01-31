@@ -1,0 +1,23 @@
+.PresentationView {
+
+}
+
+.PresentationView-main {
+  margin-top: 30px;
+  border: 1px solid #eee;
+  text-align: center;
+}
+
+.PresentationView-not-prepared {
+  font-size: 1.5em;
+  font-weight: 100;
+  color: #ccc;
+  padding: 30px;
+}
+
+.PresentationView-finished {
+  font-size: 1.5em;
+  font-weight: 100;
+  color: #ccc;
+  padding: 30px;
+}

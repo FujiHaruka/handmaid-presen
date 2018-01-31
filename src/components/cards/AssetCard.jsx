@@ -2,8 +2,9 @@ import './AssetCard.css'
 import React from 'react'
 import {pure, withState, compose} from 'recompose'
 import {Card, Icon} from 'antd'
-import {Ports, AssetType} from '../../Consts'
+import {AssetType} from '../../Consts'
 import c from 'classnames'
+import {assetPathToUrl} from '../../helpers'
 
 const CARD_WIDTH = 320
 const CARD_HEIGHT = 180
@@ -70,7 +71,6 @@ const VideoCardContent = compose(
   }
 })
 
-const toUrl = (path) => `http://localhost:${Ports.ASSETS_SERVER_PORT}/${path}`
 const AssetCard = pure(
   ({
     width = CARD_WIDTH,
@@ -83,8 +83,8 @@ const AssetCard = pure(
     playbackRate,
   }) => {
     const {path, assetType, thumbnailPath} = asset
-    const url = toUrl(path)
-    const thumbnailUrl = toUrl(thumbnailPath)
+    const url = assetPathToUrl(path)
+    const thumbnailUrl = assetPathToUrl(thumbnailPath)
     const mediaProps = {
       width,
       height,

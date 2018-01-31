@@ -15,11 +15,21 @@ class ViewStore {
       visibleHeader: true,
       deletingAsset: null,
       savingPaintVideo: false,
+      presenIndex: 0,
+      isPresenStartedPlaying: false,
+      isPresenPlaying: false,
     }
   }
 
   static computed (props) {
-    return {}
+    const {slidesArray} = props // From slideStore
+    const {presenIndex} = props
+    const presentingSlide = slidesArray[presenIndex]
+    const isPresenFinished = slidesArray.length === presenIndex
+    return {
+      isPresenFinished,
+      presentingSlide,
+    }
   }
 
   static updaters = {
@@ -29,6 +39,10 @@ class ViewStore {
     setVisibleHeader: updaterOf('visibleHeader'),
     setDeletingAsset: updaterOf('deletingAsset'),
     setSavingPaintVideo: updaterOf('savingPaintVideo'),
+    countupPresenIndex: ({presenIndex}) => () => ({presenIndex: presenIndex + 1}),
+    setPresenIndex: updaterOf('presenIndex'),
+    toggleIsPresenPlaying: updaterOf('isPresenPlaying'),
+    toggleIsPresenStartedPlaying: updaterOf('isPresenStartedPlaying')
   }
 
   static actions = {
@@ -36,6 +50,11 @@ class ViewStore {
       ok(asset.id)
       setDeletingAsset(asset)
       setVisibleAssetDeletingModal(true)
+    },
+    resetPresen: ({setPresenIndex, toggleIsPresenPlaying, toggleIsPresenStartedPlaying}) => () => {
+      toggleIsPresenPlaying(false)
+      toggleIsPresenStartedPlaying(false)
+      setPresenIndex(0)
     }
   }
 }

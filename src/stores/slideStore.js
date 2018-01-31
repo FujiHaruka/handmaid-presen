@@ -21,11 +21,13 @@ class SlideStore {
     const slidesArray = Object.keys(slides)
       .map((id) => slides[id])
       .sort((a, b) => a.index - b.index)
+    const isSlideCompleted = slidesArray.every((slide) => Boolean(slide.asset))
     const edittingSlide = slides[edittingSlideId] || null
     return {
       slides,
       slidesArray,
       edittingSlide,
+      isSlideCompleted,
     }
   }
 
