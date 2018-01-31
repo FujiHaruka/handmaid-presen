@@ -26,7 +26,7 @@ const customActions = withHandlers({
     setViewPage(ViewPage.ASSET_PAGE)
     setVisibleHeader(true)
   },
-  selectAssetAsSlide: ({edittingSlide, updateSlide, setEdittingSlideId}) => async (asset = null) => {
+  selectAssetAsSlide: ({edittingSlide, updateSlide}) => async (asset = null) => {
     ok(edittingSlide)
     const slide = clone(edittingSlide)
     slide.assetId = asset ? asset.id : null
@@ -36,7 +36,7 @@ const customActions = withHandlers({
   deleteEdittingSlide: ({slidesArray, deleteSlide, setEdittingSlideId, edittingSlide}) => async () => {
     const {id, index} = edittingSlide
     const nextEditting = slidesArray.find((slide) => slide.index === index + 1) || null
-    setEdittingSlideId(nextEditting)
+    setEdittingSlideId(nextEditting.id)
     await deleteSlide(id)
   },
   setPlaybackSpeed: ({updateSlide, edittingSlide}) => async (speed) => {

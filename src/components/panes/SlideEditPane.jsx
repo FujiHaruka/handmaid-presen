@@ -54,9 +54,8 @@ const SlideEditPane = ({
   setPlaybackSpeed,
 }) => (
   <div className='SlideEditPane'>
-    {slide && slide.id}
     {
-      isEmptySlide(slide) && 'select slide'
+      isEmptySlide(slide) && <div className='SlideEditPane-empty'>Select slide</div>
     }
     {
       !isEmptySlide(slide) && (isEmptyAsset(slide)
