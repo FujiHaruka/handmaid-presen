@@ -26,15 +26,19 @@ const customActions = withHandlers({
     setViewPage(ViewPage.ASSET_PAGE)
     setVisibleHeader(true)
   },
-  selectAssetAsSlide: ({edittingSlide, updateSlide, setEdittingSlide}) => async (asset) => {
+  selectAssetAsSlide: ({edittingSlide, updateSlide, setEdittingSlide}) => async (asset = null) => {
     ok(edittingSlide)
-    ok(asset)
     const slide = clone(edittingSlide)
-    slide.assetId = asset.id
+    slide.assetId = asset ? asset.id : null
     slide.asset = asset
     updateSlide(slide.id, slide)
     // やぼい
     setEdittingSlide(slide)
+  },
+  deleteEdittingSlide: ({deleteSlide, setEdittingSlide, edittingSlide}) => async () => {
+    await deleteSlide(edittingSlide.id)
+    // やぼい2
+    setEdittingSlide(null)
   },
   commitDeletingAsset: ({deletingAsset, setDeletingAsset, deleteAsset, setVisibleAssetDeletingModal}) => async () => {
     const {id} = deletingAsset

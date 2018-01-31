@@ -5,6 +5,7 @@ import AssetTypeTabs from '../tabs/AssetTypeTabs'
 import AssetPhotoPane from './AssetPhotoPane'
 import AssetVideoPane from './AssetVideoPane'
 import AssetCard from '../cards/AssetCard'
+import SlideEditToolBar from '../toolbars/SlideEditToolBar'
 import {AssetType} from '../../Consts'
 
 const isEmptySlide = (slide) => !slide
@@ -35,22 +36,42 @@ const SlideEdittingPane = ({
       width={640}
       height={360}
       asset={asset}
+      thumbnailOnly={false}
     />
   </div>
 )
 
 const SlideEditPane = ({
   slide = null,
-  ...props
+  deleteEdittingSlide,
+  assetTabKey,
+  setAssetTabKey,
+  assetPhotos,
+  assetVideos,
+  selectAssetAsSlide,
 }) => (
   <div className='SlideEditPane'>
+    {slide && slide.id}
     {
       isEmptySlide(slide) && 'select slide'
     }
     {
       !isEmptySlide(slide) && (isEmptyAsset(slide)
-        ? <SelectAssetPane {...props} />
+        ? <SelectAssetPane {...{
+          assetTabKey,
+          setAssetTabKey,
+          assetPhotos,
+          assetVideos,
+          selectAssetAsSlide,
+        }} />
         : <SlideEdittingPane asset={slide.asset} />)
+    }
+    {
+      !isEmptySlide(slide) &&
+      <SlideEditToolBar
+        onRemoveSlide={deleteEdittingSlide}
+        onRemoveAsset={() => selectAssetAsSlide(null)}
+      />
     }
   </div>
 )

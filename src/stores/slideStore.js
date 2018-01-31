@@ -21,7 +21,8 @@ class SlideStore {
       .map((id) => slides[id])
       .sort((a, b) => a.index - b.index)
     return {
-      slidesArray
+      slides,
+      slidesArray,
     }
   }
 
@@ -81,12 +82,19 @@ class SlideStore {
         db: Slide
       })
     },
-    deleteSlideAt: ({setSlidesRaw, slides, slidesArray}) => async (index) => {
-      if (index > slidesArray.length) {
-        throw new Error(`Index ${index} is out of range`)
-      }
-      const slide = slidesArray[index]
-      await Slide.delete(slide.id)
+    deleteSlide: ({setSlidesRaw, slides, slidesArray}) => async (id) => {
+      const slide = slides[id]
+      ok(slide)
+      const filteredSlides = slidesArray
+        .filter((slide) => slide.id === id)
+        .map((slide, index) => ({
+          ...slide,
+          index
+        }))
+        .map((slide) => ({[slide.id]: slide}))
+        .reduce((slides, slideObj) => Object.assign(slides, slideObj), {})
+      await Slide.update(filteredSlides)
+      await Slide.delete(id)
       await syncFromDb({
         set: setSlidesRaw,
         db: Slide
