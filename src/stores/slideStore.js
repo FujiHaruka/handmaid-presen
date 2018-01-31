@@ -86,10 +86,10 @@ class SlideStore {
       const slide = slides[id]
       ok(slide)
       const filteredSlides = slidesArray
-        .filter((slide) => slide.id === id)
+        .filter((slide) => slide.id !== id)
         .map((slide, index) => ({
           ...slide,
-          index
+          ...{index},
         }))
         .map((slide) => ({[slide.id]: slide}))
         .reduce((slides, slideObj) => Object.assign(slides, slideObj), {})

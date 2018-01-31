@@ -35,10 +35,13 @@ const customActions = withHandlers({
     // やぼい
     setEdittingSlide(slide)
   },
-  deleteEdittingSlide: ({deleteSlide, setEdittingSlide, edittingSlide}) => async () => {
-    await deleteSlide(edittingSlide.id)
+  deleteEdittingSlide: ({slidesArray, deleteSlide, setEdittingSlide, edittingSlide}) => async () => {
+    const {id, index} = edittingSlide
+    const nextEditting = slidesArray.find((slide) => slide.index === index + 1) || null
     // やぼい2
-    setEdittingSlide(null)
+    setEdittingSlide(nextEditting)
+
+    await deleteSlide(id)
   },
   commitDeletingAsset: ({deletingAsset, setDeletingAsset, deleteAsset, setVisibleAssetDeletingModal}) => async () => {
     const {id} = deletingAsset

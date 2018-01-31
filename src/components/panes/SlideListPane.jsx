@@ -13,12 +13,16 @@ const SlideListPane = ({
   <div className='SlideListPane'>
     {
       slidesArray.map(
-        (slide) => (
-          <SlideCard
-            key={slide.id}
-            highlight={edittingSlide && slide.id === edittingSlide.id}
-            {...{slide, setEdittingSlide}}
-          />
+        (slide, index) => (
+          <div key={slide.id} className='SlideListPane-card-wrap'>
+            <SlideCard
+              highlight={edittingSlide && slide.id === edittingSlide.id}
+              {...{slide, setEdittingSlide}}
+            />
+            <div className='SlideListPane-card-index'>
+              {index + 1}
+            </div>
+          </div>
         )
       )
     }

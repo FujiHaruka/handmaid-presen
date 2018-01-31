@@ -2,3 +2,15 @@
   height: inherit;
   overflow-y: scroll;
 }
+
+.SlideListPane-card-wrap {
+  position: relative;
+}
+
+.SlideListPane-card-index {
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  right: 16px;
+  color: #666;
+}

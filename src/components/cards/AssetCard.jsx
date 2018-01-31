@@ -1,6 +1,6 @@
 import './AssetCard.css'
 import React from 'react'
-import {pure, withState} from 'recompose'
+import {pure, withState, compose, lifecycle} from 'recompose'
 import {Card, Icon} from 'antd'
 import {Ports, AssetType} from '../../Consts'
 import c from 'classnames'
@@ -12,7 +12,18 @@ const sizeStyle = ({width, height}) => ({
   height: `${height}px`,
 })
 
-const VideoCardContent = withState('visibleThumbnail', 'toggleVisibleThumbnail', true)(
+const VideoCardContent = compose(
+  pure,
+  withState('visibleThumbnail', 'toggleVisibleThumbnail', true),
+  lifecycle({
+    componentDidUpdate (prevProps) {
+      const {props} = this
+      if (props.src !== prevProps.src) {
+        props.toggleVisibleThumbnail(true)
+      }
+    }
+  })
+)(
   ({
     width,
     height,
