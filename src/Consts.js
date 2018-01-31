@@ -26,7 +26,7 @@ export const Ports = {
   ASSETS_SERVER_PORT: conf.ASSETS_SERVER_PORT,
 }
 
-export const VIDEO_PLAY_SPEED = {
-  NORMAL: 1.0,
-  FAST: 5.0,
+export const PlaybackSpeed = {
+  PLAYBACK_NORMAL: 1.0,
+  PLAYBACK_FAST: 5.0,
 }

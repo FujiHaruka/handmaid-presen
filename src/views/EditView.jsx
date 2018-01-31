@@ -23,6 +23,7 @@ class EditView extends Component {
       assetVideos,
       selectAssetAsSlide,
       deleteEdittingSlide,
+      setPlaybackSpeed,
     } = this.props
     return (
       <Layout className='EditView'>
@@ -46,6 +47,7 @@ class EditView extends Component {
               assetVideos,
               selectAssetAsSlide,
               deleteEdittingSlide,
+              setPlaybackSpeed,
             }}
           />
         </Content>

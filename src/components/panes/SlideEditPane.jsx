@@ -30,6 +30,7 @@ const SelectAssetPane = ({
 
 const SlideEdittingPane = ({
   asset,
+  playbackRate,
 }) => (
   <div className='SlideEdittingPane'>
     <AssetCard
@@ -37,6 +38,7 @@ const SlideEdittingPane = ({
       height={360}
       asset={asset}
       thumbnailOnly={false}
+      playbackRate={playbackRate}
     />
   </div>
 )
@@ -49,6 +51,7 @@ const SlideEditPane = ({
   assetPhotos,
   assetVideos,
   selectAssetAsSlide,
+  setPlaybackSpeed,
 }) => (
   <div className='SlideEditPane'>
     {slide && slide.id}
@@ -64,13 +67,15 @@ const SlideEditPane = ({
           assetVideos,
           selectAssetAsSlide,
         }} />
-        : <SlideEdittingPane asset={slide.asset} />)
+        : <SlideEdittingPane asset={slide.asset} playbackRate={slide.playbackRate} />)
     }
     {
       !isEmptySlide(slide) &&
       <SlideEditToolBar
         onRemoveSlide={deleteEdittingSlide}
         onRemoveAsset={() => selectAssetAsSlide(null)}
+        assetType={slide && slide.asset && slide.asset.assetType}
+        {...{setPlaybackSpeed, playbackRate: slide.playbackRate}}
       />
     }
   </div>

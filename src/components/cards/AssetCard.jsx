@@ -79,7 +79,8 @@ const AssetCard = pure(
     prepareDeleteAsset, // nullable
     thumbnailOnly = false,
     onClick = () => {},
-    className
+    className,
+    playbackRate,
   }) => {
     const {path, assetType, thumbnailPath} = asset
     const url = toUrl(path)
@@ -99,7 +100,7 @@ const AssetCard = pure(
             {
               assetType === AssetType.PHOTO
                 ? <img className='AssetCard-img' {...mediaProps} alt='asset card' />
-                : <VideoCardContent {...mediaProps} thumbnailOnly={thumbnailOnly} />
+                : <VideoCardContent {...mediaProps} thumbnailOnly={thumbnailOnly} playbackRate={playbackRate} />
             }
             {
               prepareDeleteAsset &&

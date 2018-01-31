@@ -39,6 +39,11 @@ const customActions = withHandlers({
     setEdittingSlideId(nextEditting)
     await deleteSlide(id)
   },
+  setPlaybackSpeed: ({updateSlide, edittingSlide}) => async (speed) => {
+    const slide = clone(edittingSlide)
+    slide.playbackRate = speed
+    await updateSlide(slide.id, slide)
+  },
   commitDeletingAsset: ({deletingAsset, setDeletingAsset, deleteAsset, setVisibleAssetDeletingModal}) => async () => {
     const {id} = deletingAsset
     ok(id)
