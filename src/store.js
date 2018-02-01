@@ -36,7 +36,7 @@ const customActions = withHandlers({
   deleteEdittingSlide: ({slidesArray, deleteSlide, setEdittingSlideId, edittingSlide}) => async () => {
     const {id, index} = edittingSlide
     const nextEditting = slidesArray.find((slide) => slide.index === index + 1) || null
-    setEdittingSlideId(nextEditting.id)
+    setEdittingSlideId(nextEditting && nextEditting.id)
     await deleteSlide(id)
   },
   setPlaybackSpeed: ({updateSlide, edittingSlide}) => async (speed) => {

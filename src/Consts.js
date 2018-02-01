@@ -30,3 +30,10 @@ export const PlaybackSpeed = {
   PLAYBACK_NORMAL: 1.0,
   PLAYBACK_FAST: 5.0,
 }
+
+export const PresenSize = {
+  NORMAL_WIDTH: 640,
+  NORMAL_HEIGHT: 360,
+  WIDE_WIDTH: 1280,
+  WIDE_HEIGHT: 720,
+}

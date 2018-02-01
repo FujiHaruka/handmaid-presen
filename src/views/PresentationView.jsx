@@ -1,9 +1,14 @@
 import './PresentationView.css'
 import React, {Component} from 'react'
 import {asView} from '../wrappers'
-import {AssetType} from '../Consts'
+import {AssetType, PresenSize} from '../Consts'
 import {assetPathToUrl} from '../helpers'
 import {Button} from 'antd'
+
+const {
+  NORMAL_WIDTH,
+  NORMAL_HEIGHT,
+} = PresenSize
 
 class PresenPhoto extends Component {
   render () {
@@ -12,7 +17,7 @@ class PresenPhoto extends Component {
     } = this.props
     const src = assetPathToUrl(slide.asset.path)
     return (
-      <img className='PresentationView-img' src={src} width={640} height={360} />
+      <img className='PresentationView-img' src={src} width={NORMAL_WIDTH} height={NORMAL_HEIGHT} ref={(i) => { this.img = i }} />
     )
   }
 
@@ -30,8 +35,14 @@ class PresenPhoto extends Component {
     }
     const {
       countupPresenIndex,
+      toggleIsPresenStarted,
+      isLastPresenSlide,
     } = this.props
-    countupPresenIndex()
+    if (isLastPresenSlide) {
+      toggleIsPresenStarted(false)
+    } else {
+      countupPresenIndex()
+    }
   }
 }
 
@@ -42,7 +53,7 @@ class PresenVideo extends Component {
     } = this.props
     const src = assetPathToUrl(slide.asset.path)
     return (
-      <video className='PresentationView-video' src={src} width={640} height={360} ref={v => { this.video = v }} />
+      <video className='PresentationView-video' src={src} width={NORMAL_WIDTH} height={NORMAL_HEIGHT} autoPlay ref={v => { this.video = v }} />
     )
   }
 
@@ -53,6 +64,7 @@ class PresenVideo extends Component {
       toggleIsPresenPlaying,
     } = this.props
     document.addEventListener('keydown', this.onPressRightKey)
+    toggleIsPresenPlaying(true)
     video.addEventListener('ended', () => {
       toggleIsPresenPlaying(false)
     })
@@ -79,19 +91,86 @@ class PresenVideo extends Component {
       return
     }
     const {
-      isPresenStartedPlaying,
+      countupPresenIndex,
+      isLastPresenSlide,
+      toggleIsPresenStarted,
+    } = this.props
+    if (isLastPresenSlide) {
+      toggleIsPresenStarted(false)
+    } else {
+      countupPresenIndex()
+    }
+  }
+}
+
+class Presentation extends Component {
+  render () {
+    const {
+      slide,
+      isLastPresenSlide,
       countupPresenIndex,
       toggleIsPresenPlaying,
-      toggleIsPresenStartedPlaying,
+      toggleIsPresenStarted,
     } = this.props
-    if (isPresenStartedPlaying) {
-      countupPresenIndex()
-      toggleIsPresenPlaying(false)
-      toggleIsPresenStartedPlaying(false)
-    } else {
-      this.video.play()
-      toggleIsPresenStartedPlaying(true)
-      toggleIsPresenPlaying(true)
+    return (
+      <div className='PresentationView-main'>
+        {
+          slide.asset.assetType === AssetType.PHOTO
+            ? <PresenPhoto
+              {...{
+                slide,
+                countupPresenIndex,
+                isLastPresenSlide,
+                toggleIsPresenStarted,
+              }}
+              ref={p => { this.presenPhoto = p }}
+            />
+            : <PresenVideo
+              {...{
+                slide,
+                countupPresenIndex,
+                toggleIsPresenPlaying,
+                isLastPresenSlide,
+                toggleIsPresenStarted,
+              }}
+              ref={(p) => { this.presenVideo = p }}
+            />
+        }
+        <canvas className='PresentationView-canvas' width={NORMAL_WIDTH} height={NORMAL_HEIGHT} ref={(c) => { this.canvas = c }} />
+      </div>
+    )
+  }
+
+  componentDidMount () {
+    this.start()
+  }
+
+  componentWillUnmount () {
+    this.cancelAnimation()
+    this.props.resetPresen()
+  }
+
+  start = () => {
+    this.props.resetPresen()
+    this.cancelAnimation()
+    const {canvas} = this
+    const context = canvas.getContext('2d')
+    const syncCanvas = () => {
+      const {presenVideo, presenPhoto} = this
+      if (presenVideo && presenVideo.video) {
+        context.drawImage(presenVideo.video, 0, 0, NORMAL_WIDTH, NORMAL_HEIGHT)
+        window.requestAnimationFrame(syncCanvas)
+      } else if (presenPhoto && presenPhoto.img) {
+        context.drawImage(presenPhoto.img, 0, 0, NORMAL_WIDTH, NORMAL_HEIGHT)
+        window.requestAnimationFrame(syncCanvas)
+      }
+    }
+    this.animationId = window.requestAnimationFrame(syncCanvas)
+  }
+
+  cancelAnimation () {
+    if (this.animationId) {
+      window.cancelAnimationFrame(this.animationId)
     }
   }
 }
@@ -101,11 +180,11 @@ class PresentationView extends Component {
     const {
       presentingSlide: slide,
       isSlideCompleted,
-      isPresenFinished,
-      isPresenStartedPlaying,
+      isPresenStarted,
+      isLastPresenSlide,
       toggleIsPresenPlaying,
+      toggleIsPresenStarted,
       countupPresenIndex,
-      toggleIsPresenStartedPlaying,
       resetPresen,
     } = this.props
     if (!isSlideCompleted) {
@@ -115,45 +194,29 @@ class PresentationView extends Component {
         </div>
       )
     }
-    if (isPresenFinished) {
+    if (!isPresenStarted) {
       return (
         <div className='PresentationView-finished'>
-          finished
           <div>
-            <Button onClick={resetPresen}>AGAIN</Button>
+            <Button onClick={toggleIsPresenStarted}>START</Button>
           </div>
         </div>
       )
     }
     return (
       <div className='PresentationView'>
-        <div className='PresentationView-main'>
-          {
-            slide.asset.assetType === AssetType.PHOTO
-              ? <PresenPhoto
-                {...{
-                  slide,
-                  countupPresenIndex,
-                }}
-              />
-              : <PresenVideo
-                {...{
-                  slide,
-                  isPresenStartedPlaying,
-                  countupPresenIndex,
-                  toggleIsPresenPlaying,
-                  toggleIsPresenStartedPlaying,
-                }}
-            />
-          }
-        </div>
+        <Presentation
+          {...{
+            slide,
+            isLastPresenSlide,
+            countupPresenIndex,
+            toggleIsPresenPlaying,
+            resetPresen,
+            toggleIsPresenStarted,
+          }}
+        />
       </div>
     )
-  }
-
-  componentDidMount () {}
-  componentWillUnmount () {
-    this.props.resetPresen()
   }
 }
 

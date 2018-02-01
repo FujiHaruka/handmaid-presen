@@ -16,6 +16,7 @@ class ViewStore {
       deletingAsset: null,
       savingPaintVideo: false,
       presenIndex: 0,
+      isPresenStarted: false,
       isPresenStartedPlaying: false,
       isPresenPlaying: false,
     }
@@ -25,10 +26,10 @@ class ViewStore {
     const {slidesArray} = props // From slideStore
     const {presenIndex} = props
     const presentingSlide = slidesArray[presenIndex]
-    const isPresenFinished = slidesArray.length === presenIndex
+    const isLastPresenSlide = presenIndex === slidesArray.length - 1
     return {
-      isPresenFinished,
       presentingSlide,
+      isLastPresenSlide,
     }
   }
 
@@ -42,7 +43,8 @@ class ViewStore {
     countupPresenIndex: ({presenIndex}) => () => ({presenIndex: presenIndex + 1}),
     setPresenIndex: updaterOf('presenIndex'),
     toggleIsPresenPlaying: updaterOf('isPresenPlaying'),
-    toggleIsPresenStartedPlaying: updaterOf('isPresenStartedPlaying')
+    toggleIsPresenStartedPlaying: updaterOf('isPresenStartedPlaying'),
+    toggleIsPresenStarted: updaterOf('isPresenStarted'),
   }
 
   static actions = {

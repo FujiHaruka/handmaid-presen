@@ -21,3 +21,13 @@
   color: #ccc;
   padding: 30px;
 }
+
+.PresentationView-img {
+  display: none;
+}
+.PresentationView-video {
+  display: none;
+}
+.PresentationView-canvas {
+
+}
