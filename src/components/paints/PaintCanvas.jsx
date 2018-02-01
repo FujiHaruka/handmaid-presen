@@ -12,12 +12,13 @@ const CANVAS_WIDTH = 1920
 const CANVAS_HEIGHT = 1080
 
 const SKIP_FOR_SMOOTH = 4
+const ZOOM = 0.6
 
 const lineStyle = (ctx, settings = {}) => {
   const {color = '#222'} = settings
   ctx.lineCap = 'round'
   ctx.strokeStyle = color
-  ctx.lineWidth = 3
+  ctx.lineWidth = 6
 }
 
 class PaintCanvas extends Component {
@@ -69,8 +70,8 @@ class PaintCanvas extends Component {
     const {setPaintDrawing, setPaintPrevCoord, clearPaintCurveCoords, pushPaintCurveCoords} = this.props
     const {top, left} = e.target.getBoundingClientRect()
     const coord = {
-      x: e.clientX - left,
-      y: e.clientY - top
+      x: e.clientX / ZOOM - left,
+      y: e.clientY / ZOOM - top,
     }
     setPaintPrevCoord(coord)
     setPaintDrawing(true)
@@ -95,8 +96,8 @@ class PaintCanvas extends Component {
     }
     const {top, left} = e.target.getBoundingClientRect()
     const coord = {
-      x: e.clientX - left,
-      y: e.clientY - top
+      x: e.clientX / ZOOM - left,
+      y: e.clientY / ZOOM - top,
     }
     this.drawLine(paintPrevCoord, coord)
     setPaintPrevCoord(coord)
@@ -126,7 +127,7 @@ class PaintCanvas extends Component {
   startRecord () {
     const stream = this.canvas.captureStream(30)
     const mediaRecorder = new window.MediaRecorder(stream, {mimeType: 'video/webm'})
-    mediaRecorder.start(100) // 100ms
+    mediaRecorder.start()
     mediaRecorder.ondataavailable = (e) => {
       if (e.data && e.data.size > 0) {
         this.recordedBlobs.push(e.data)

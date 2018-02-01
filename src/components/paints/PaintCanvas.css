@@ -10,8 +10,11 @@
 #PaintCanvas-main {
 	position: relative;
 	z-index: 1;
+	border: 1px solid #ccc;
+	zoom: 0.6; /* 描画座標に関係あるので注意 */
 }
 #PaintCanvas-hidden {
+	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
